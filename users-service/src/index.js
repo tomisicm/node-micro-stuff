@@ -1,3 +1,5 @@
-import path from "path"
+import "@babel/polyfill";
 
-console.log("wpork");
+import "#root/db/connection";
+import "#root/server/startServer"
+
