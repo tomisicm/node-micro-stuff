@@ -9,27 +9,32 @@ import typeDefs from "#root/graphql/typeDefs";
 
 import formatGraphQLErrors from "./formatGraphQLErrors";
 
+import { authentication } from "#root/middleware/auth/authMiddleware";
+
 const PORT = accessEnv("PORT", 7000);
 
 const apolloServer = new ApolloServer({
-    formatError: formatGraphQLErrors,
-    resolvers,
-    typeDefs
+  formatError: formatGraphQLErrors,
+  resolvers,
+  typeDefs
 });
 
 const app = express();
-
 app.use(
-    cors({
-        origin: (origin, cb) => cb(null, true),
-        credentials: true
-    })
-)
+  cors({
+    origin: (origin, cb) => cb(null, true),
+    credentials: true
+  })
+);
+
+app.use("/api", authentication);
 
 apolloServer.applyMiddleware({
-    app, cors: false, path: "/graphql"
+  app,
+  cors: false,
+  path: "/graphql"
 });
 
 app.listen(PORT, "0.0.0.0", () => {
-    console.info(`api-gateway-service listening on port ${PORT}`);
-})
+  console.info(`api-gateway-service listening on port ${PORT}`);
+});
