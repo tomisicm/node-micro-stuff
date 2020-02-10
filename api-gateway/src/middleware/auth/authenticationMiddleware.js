@@ -1,15 +1,15 @@
 import { User } from "#root/db/models";
-import generateUUID from "#root/helpers/generateUUID";
-import hashPassword from "#root/helpers/hashPassword";
+// import generateUUID from "#root/helpers/generateUUID";
+// import hashPassword from "#root/helpers/hashPassword";
 import comparePassword from "#root/helpers/comparePassword";
 
-import config from "#root/helpers/config";
+import { config } from "#root/helpers/config";
 
 import jwt from "jsonwebtoken";
 
 export const newToken = user => {
   return jwt.sign(
-    { id: user.id, user: user.name, admin: user.admin },
+    { id: user.id, email: user.email },
     config.secrets.jwt,
     {
       expiresIn: config.secrets.jwtExp
@@ -25,30 +25,31 @@ export const verifyToken = token =>
     });
   });
 
-export const signup = async (req, res) => {
-  const value = req.parsed;
+// export const register = async (req, res) => {
+//   const value = req.parsed;
 
-  try {
-    const user = await User.create(value);
-    const token = newToken(user);
-    return res.status(201).send({ token });
-  } catch (e) {
-    return res.status(500).send(e);
-  }
-};
+//   try {
+//     const user = await User.create(value);
+//     const token = newToken(user);
+//     return res.status(201).send({ token });
+//   } catch (e) {
+//     return res.status(500).send(e);
+//   }
+// };
 
-export const signin = async (req, res) => {
+export const login = async (req, res) => {
   let user;
-  const value = req.parsed;
 
   try {
-    user = await User.findOne({ email: value.email })
-      .select("name email password user admin")
-      .exec();
+    user = await User.findOne({
+      where: { 
+        email: req.body.email
+      },
+      raw: true
+    });
 
     if (!user) {
       return res.status(401).send({
-        // METHOD FOR CREATING THIS ERROR
         errors: {
           email: {
             message: "Invalid email and passoword combination"
@@ -57,7 +58,7 @@ export const signin = async (req, res) => {
       });
     }
 
-    const match = await user.comparePassword(value.password);
+    const match = await comparePassword(req.body.password, user.passwordHash);
 
     if (!match) {
       return res.status(401).send({
@@ -68,20 +69,21 @@ export const signin = async (req, res) => {
         }
       });
     }
+
+    delete(user.passwordHash);
     const token = newToken(user);
 
-    return res.status(201).send({ user: user.toObject(), token: token });
+    return res.status(201).send({ 
+      user: user, 
+      token: { access_token: token, token_type:"JWT", expiresIn: config.secrets.jwtExp  }
+    });
   } catch (e) {
     console.error(e);
     res.status(500).send(e);
   }
 };
 
-export const authentication = async (req, res, next) => {
-  console.log(User);
-  // await User.findAll();
-  return res.status(201).send("dicks");
-
+export const authenticationMiddleware = async (req, res, next) => {
   const bearer = req.headers.authorization;
 
   if (bearer && bearer.startsWith("Bearer ")) {
@@ -91,27 +93,21 @@ export const authentication = async (req, res, next) => {
     try {
       payload = await verifyToken(token);
     } catch (e) {
-      return res.status(401).end();
+      return res.status(401).send(e);
     }
 
-    const user = await User.findById(payload.id)
-      .select("-password")
-      .lean()
-      .exec();
+    let user = await User.findByPk(payload.id).then(function (user) {
+      return user.dataValues
+    });
 
     if (!user) {
       return res.status(401).end();
     }
 
     req.user = user;
+
+    next();
   }
 
-  next();
-};
-
-export const authorization = async (req, res, next) => {
-  if (!req.user) {
-    return res.status(401).end();
-  }
-  next();
+  return res.status(403).end();
 };

@@ -1,5 +1,7 @@
+// TODO: reduce after proper implementation
 export const config = {
   secrets: {
-    jwt: "learneverything"
+    jwt: "learneverything",
+    jwtExp: "10h"
   }
 };
