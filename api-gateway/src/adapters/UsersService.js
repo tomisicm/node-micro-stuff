@@ -1,7 +1,7 @@
-import got from "got";
+import { User } from "#root/db/models";
+import generateUUID from "#root/helpers/generateUUID";
+import hashPassword from "#root/helpers/hashPassword";
 
-// docker just knows the adress of users service
-const USERS_SERVICE_URI = "http://users-service:7101"
 
 export default class UsersService {
     static async createUser(
@@ -10,12 +10,16 @@ export default class UsersService {
             password
         }
     ) {
-        const data = await got
-            .post(`${USERS_SERVICE_URI}/users`, {
-                json: { email, password }
-            })
-            .json();
-        
-        return data;
+        try {
+            const newUser = await User.create({
+                email: email,
+                id: generateUUID(),
+                passwordHash: hashPassword(password)
+            });
+            return newUser;
+        } catch (e) {
+            console.error(e);
+            throw e;
+        }
     }
 }
