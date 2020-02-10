@@ -2,6 +2,7 @@ version: "3"
 services:
   api-gateway-service:
     build: "./api-gateway"
+    restart: "always"
     depends_on:
       - listings-service
       - users-service
@@ -27,6 +28,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=db
+    volumes:
+      - /var/lib/mysql
     image: mysql:5.7.29
     ports:
       - 0.0.0.0:7200:3306
@@ -49,3 +52,5 @@ services:
     image: mysql:5.7.29
     ports:
       - 0.0.0.0:7201:3306
+    volumes:
+      - /var/lib/mysql
