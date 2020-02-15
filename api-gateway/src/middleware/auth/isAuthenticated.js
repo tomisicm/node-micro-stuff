@@ -11,15 +11,16 @@ module.exports = async (req, res, next) => {
 
 		try {
 			payload = await verifyToken(token);
-		} catch (e) {
-			console.log(e);
-		}
 
-		let user = await User.findByPk(payload.id).then(function(user) {
-			req.user = user.dataValues;
-			req.isAuth = true;
-			return user.dataValues;
-		});
+			if (payload) {
+				await User.findByPk(payload.id).then(function(user) {
+					req.user = user.dataValues;
+					req.isAuth = true;
+				});
+			}
+		} catch (e) {
+			// console.log(e);
+		}
 	}
 
 	next();
