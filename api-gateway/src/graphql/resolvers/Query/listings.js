@@ -1,7 +1,7 @@
 import ListingService from "#root/adapters/ListingService";
 import isAuthorized from "#root/middleware/auth/isAuthorized";
 
-const listingResolver = async (obj, args, context, info) => {
+const listingsResolver = async (obj, args, context, info) => {
 	try {
 		isAuthorized(context.req);
 		return await ListingService.fetchAllListings();
@@ -10,4 +10,14 @@ const listingResolver = async (obj, args, context, info) => {
 	}
 };
 
-export default listingResolver;
+const listingResolver = async (obj, args, context, info) => {
+	const { id } = args;
+	try {
+		isAuthorized(context.req);
+		return await ListingService.fetchListingById(id);
+	} catch (e) {
+		throw e;
+	}
+};
+
+export { listingsResolver as listings, listingResolver as listing };

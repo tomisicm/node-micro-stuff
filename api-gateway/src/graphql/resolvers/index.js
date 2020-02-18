@@ -3,4 +3,5 @@ import * as Query from "./Query";
 
 const resolvers = { Mutation, Query };
 
+// console.log(resolvers);
 export default resolvers;

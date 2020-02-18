@@ -1,2 +1,5 @@
-export { default as listings } from "./listings";
-export { default as userLogin } from "./user";
+import { listings, listing } from "./listings";
+import { userLogin } from "./user";
+
+export { listings, listing };
+export { userLogin };
