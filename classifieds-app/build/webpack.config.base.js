@@ -67,7 +67,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',
-      inject: true
+      inject: true,
+      alwaysWriteToDisk: true
     }),
     new VueLoaderPlugin(),
     new CopyWebpackPlugin([{
