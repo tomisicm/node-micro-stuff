@@ -2,12 +2,10 @@ import Vue from "vue";
 import Router from "vue-router";
 
 import AppAuth from "@/views/AppAuth";
-import AppLogin from "@/views/auth/AppLogin";
-import AppRegister from "@/views/auth/AppRegister";
+import AppLogin from "@/components/auth/AppLogin";
+import AppRegister from "@/components/auth/AppRegister";
 
 Vue.use(Router);
-
-console.log(AppLogin);
 
 const router = new Router({
   mode: "history",
