@@ -4,9 +4,6 @@ import Router from 'vue-router'
 import Home from 'pages/Home'
 import Auth from 'pages/Auth'
 
-import Login from 'components/auth/Login'
-import Register from 'components/auth/Register'
-
 Vue.use(Router)
 
 const routes = [
@@ -20,15 +17,19 @@ const routes = [
     children: [
       {
         path: 'login',
-        component: Login
+        name: 'login',
+        component: () => import('components/auth/Login')
       },
       {
         path: 'register',
-        component: Register
+        name: 'register',
+        component: () => import('components/auth/Register')
       }
     ]
   }
 ]
+
+// console.log(Login)
 
 export default new Router({
   mode: 'history',
