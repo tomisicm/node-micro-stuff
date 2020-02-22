@@ -1,13 +1,10 @@
 <template>
   <div>
-
     <h2>Login</h2>
 
     <div>
-
       <div>
-        <form v-on:submit.prevent>
-
+        <form method="POST" v-on:submit.prevent>
           <div>
             <label for="email">Email:</label>
             <input
@@ -20,7 +17,7 @@
             />
           </div>
 
-          <div >
+          <div>
             <label for="password">Password:</label>
             <input
               v-model="form.password"
@@ -29,57 +26,49 @@
               id="password"
               aria-describedby="password"
               placeholder="Enter password"
-            >
+            />
           </div>
 
           <div>
-            <button
-              @click="handleLogin"
-            >
-              Login
-            </button>
+            <button @click="handleLogin">Login</button>
           </div>
-
         </form>
       </div>
-
     </div>
-
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex";
+import { LOGIN_QUERY } from "@/graphql/authenticate";
 
 export default {
   props: {
     userEmail: {
       type: String,
-      default: ''
+      default: ""
     }
   },
-  data () {
+  data() {
     return {
       form: {
-        email: this.userEmail || '',
-        password: ''
+        email: this.userEmail || "",
+        password: ""
       }
-    }
+    };
   },
   methods: {
-    ...mapActions('authStore', ['login']),
+    ...mapActions("authStore", ["login"]),
 
-    async handleLogin () {
+    async handleLogin() {
       try {
-        await this.login(this.form)
+        await this.login(LOGIN_QUERY);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
   },
-  computed: {
-    
-  },
-  name: 'Login'
-}
+  computed: {},
+  name: "Login"
+};
 </script>

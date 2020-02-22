@@ -1,71 +1,48 @@
-import http from './http-service'
+import { http, setAuthHeader } from "./http-service";
+import checkToken from "./checkToken";
 
 class AuthService {
-  login (email, password) {
+  login(query) {
     return http
-      .post('/login', {
-        email,
-        password
-      })
+      .post("", JSON.stringify({ query }))
       .then(response => {
-        this.loggingIn(response.data)
-        // return response
+        this.loggingIn(response.data);
       })
       .catch(error => {
-        throw error
-      })
+        throw error;
+      });
   }
 
-  register (email, password, passwordConfirm) {
+  register(query) {
     return http
-      .post('/register', {
-        email,
-        password,
-        passwordConfirm
-      })
+      .post("", JSON.stringify({ query }))
       .then(response => {
-        return response
+        return response;
       })
       .catch(error => {
-        throw error
-      })
+        throw error;
+      });
   }
 
-  logout () {
-
-    localStorage.removeItem('user')
-    localStorage.removeItem('token')
-    localStorage.removeItem('id')
-    this.setAuthHeaders()
-    return Promise.resolve()
+  logout() {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
+    this.setAuthHeaders();
+    return Promise.resolve();
   }
 
-  setAuthHeaders (token) {
-    if (!token) {
-      delete http.defaults.headers.common['authorization']
-      return
-    }
-    return (http.defaults.headers.common['authorization'] = `Bearer ${token}`)
-  }
-
-  loggingIn (data) {
-    localStorage.setItem('user', JSON.stringify(data.user))
-    localStorage.setItem('token', data.token)
-    localStorage.setItem('id', data.user._id)
-    this.setAuthHeaders(data.token)
+  loggingIn({ data }) {
+    const { userLogin } = data;
+    // localStorage.setItem("user", JSON.stringify(userLogin.user));
+    localStorage.setItem("token", userLogin.token);
+    // localStorage.setItem("id", userLogin.user.id);
+    setAuthHeader(userLogin.token);
   }
 }
 
-const checkToken = service => {
-  let token = localStorage.getItem('token')
+const authService = new AuthService();
 
-  if (token) {
-    service.setAuthHeaders(token)
-  }
-}
+checkToken(authService);
 
-const authService = new AuthService()
-
-checkToken(authService)
-
-export default authService
+export default authService;
