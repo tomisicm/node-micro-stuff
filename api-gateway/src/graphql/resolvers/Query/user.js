@@ -7,4 +7,4 @@ const loginUserResolver = async (obj, { userInput }) => {
 	return await UsersService.loginUser({ email, password });
 };
 
-module.exports = loginUserResolver;
+export { loginUserResolver as userLogin };

@@ -23,12 +23,22 @@ const typeDefs = gql`
 		password: String!
 	}
 
+	input ListingInput {
+		id: ID
+		title: String!
+		description: String!
+	}
+
 	type Mutation {
 		createUser(userInput: UserInput): User!
+		createListing(listingInput: ListingInput): Listing!
+		updateListing(listingInput: ListingInput): Listing!
+		deleteListing(id: String!): Listing
 	}
 
 	type Query {
 		listings: [Listing!]!
+		listing(id: ID!): Listing!
 		userLogin(userInput: UserInput): AuthData!
 	}
 `;
