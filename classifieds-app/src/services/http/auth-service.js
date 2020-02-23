@@ -32,8 +32,11 @@ class AuthService {
     return Promise.resolve();
   }
 
-  loggingIn({ data }) {
-    const { userLogin } = data;
+  loggingIn({ ["data"]: { userLogin } }) {
+    // console.log(data);
+    // console.log(userLogin);
+
+    // const { userLogin } = data;
     // localStorage.setItem("user", JSON.stringify(userLogin.user));
     localStorage.setItem("token", userLogin.token);
     // localStorage.setItem("id", userLogin.user.id);
