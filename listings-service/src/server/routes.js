@@ -47,8 +47,13 @@ const setupRoutes = app => {
 		try {
 			const listing = await Listing.destroy({
 				where: { id: req.params.id }
+			}).then(function(deletedRecord) {
+				if (deletedRecord === 1) {
+					return res.status(200).json(true);
+				} else {
+					return res.status(404).json(false);
+				}
 			});
-			return res.json(listing);
 		} catch (e) {
 			return res.json(e);
 		}
