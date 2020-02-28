@@ -37,7 +37,9 @@ export default class ListingService {
 	}
 
 	static async deleteListing(id) {
-		const data = await got.delete(`${LISTING_SERVICE_URI}/listings/${id}`);
+		const data = await got
+			.delete(`${LISTING_SERVICE_URI}/listings/${id}`)
+			.json();
 		return data;
 	}
 }

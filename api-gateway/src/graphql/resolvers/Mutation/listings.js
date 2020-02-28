@@ -27,11 +27,11 @@ const updateListingResolver = async (obj, args, context, info) => {
 };
 
 const deleteListingResolver = async (obj, args, context, info) => {
-	const { listingInput } = args;
+	const { id } = args;
 	try {
 		isAuthorized(context.req);
-		const listing = await ListingService.deleteListing(listingInput);
-		return listing;
+		const isDeleted = await ListingService.deleteListing(id);
+		return isDeleted;
 	} catch (e) {
 		console.log(e);
 		throw e;
