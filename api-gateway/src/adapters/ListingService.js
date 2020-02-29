@@ -1,4 +1,5 @@
 import got from "got";
+import ResourceNotFoundError from "#root/errors/ResourceNotFoundError";
 
 const LISTING_SERVICE_URI = "http://listings-service:7100";
 
@@ -37,9 +38,13 @@ export default class ListingService {
 	}
 
 	static async deleteListing(id) {
-		const data = await got
-			.delete(`${LISTING_SERVICE_URI}/listings/${id}`)
-			.json();
-		return data;
+		try {
+			const data = await got
+				.delete(`${LISTING_SERVICE_URI}/listings/${id}`)
+				.json();
+			return data;
+		} catch (e) {
+			throw new ResourceNotFoundError(id, "listing");
+		}
 	}
 }

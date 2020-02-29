@@ -15,7 +15,6 @@ const createListingResolver = async (obj, args, context, info) => {
 
 const updateListingResolver = async (obj, args, context, info) => {
 	const { listingInput } = args;
-	console.log(args);
 	try {
 		isAuthorized(context.req);
 		const listing = await ListingService.updateListing(listingInput);
@@ -33,7 +32,6 @@ const deleteListingResolver = async (obj, args, context, info) => {
 		const isDeleted = await ListingService.deleteListing(id);
 		return isDeleted;
 	} catch (e) {
-		console.log(e);
 		throw e;
 	}
 };
