@@ -5,6 +5,7 @@ const createListingResolver = async (obj, args, context, info) => {
 	const { listingInput } = args;
 	try {
 		isAuthorized(context.req);
+		listingInput.createdBy = context.req.user.id;
 		const listing = await ListingService.createListing(listingInput);
 		return listing;
 	} catch (e) {

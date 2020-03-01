@@ -51,4 +51,16 @@ export default class UsersService {
 			throw e;
 		}
 	}
+
+	static async fetchUserById(id) {
+		try {
+			const user = await User.findByPk(id, {
+				raw: true
+			});
+			return user;
+		} catch (e) {
+			console.log(e);
+			throw e;
+		}
+	}
 }
