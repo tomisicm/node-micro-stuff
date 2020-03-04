@@ -1,4 +1,5 @@
 import ListingService from "#root/adapters/ListingService";
+import UserService from "#root/adapters/UserService";
 import isAuthorized from "#root/middleware/auth/isAuthorized";
 
 const listingsResolver = async (obj, args, context, info) => {
@@ -14,7 +15,10 @@ const listingResolver = async (obj, args, context, info) => {
 	const { id } = args;
 	try {
 		isAuthorized(context.req);
-		return await ListingService.fetchListingById(id);
+		const listing = await ListingService.fetchListingById(id);
+		const user = await UserService.fetchUserById(listing.createdBy);
+		listing.createdBy = user;
+		return listing;
 	} catch (e) {
 		throw e;
 	}

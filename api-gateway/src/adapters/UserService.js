@@ -5,7 +5,7 @@ import comparePassword from "#root/helpers/comparePassword";
 import { newToken } from "#root/helpers/token";
 import { config } from "#root/helpers/config";
 
-export default class UsersService {
+export default class UserService {
 	static async createUser({ email, password }) {
 		try {
 			const newUser = await User.create({
@@ -55,6 +55,7 @@ export default class UsersService {
 	static async fetchUserById(id) {
 		try {
 			const user = await User.findByPk(id, {
+				attributes: ["id", "email"],
 				raw: true
 			});
 			return user;
