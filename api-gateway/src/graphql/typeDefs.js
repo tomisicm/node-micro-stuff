@@ -5,7 +5,8 @@ const typeDefs = gql`
 		description: String!
 		id: ID!
 		title: String!
-		createdBy: User!
+		createdBy: ID!
+		creator: User!
 	}
 
 	type User {

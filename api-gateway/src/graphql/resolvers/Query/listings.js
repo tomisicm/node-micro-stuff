@@ -16,8 +16,9 @@ const listingResolver = async (obj, args, context, info) => {
 	try {
 		isAuthorized(context.req);
 		const listing = await ListingService.fetchListingById(id);
-		const user = await UserService.fetchUserById(listing.createdBy);
-		listing.createdBy = user;
+		listing.creator = async () => {
+			return await UserService.fetchUserById(listing.createdBy);
+		};
 		return listing;
 	} catch (e) {
 		throw e;
