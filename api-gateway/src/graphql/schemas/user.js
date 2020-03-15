@@ -2,6 +2,7 @@ export const typeDef = `
   type User {
     id: ID!
     email: String!
+    isthisit: String!
   }
 
   type AuthData {

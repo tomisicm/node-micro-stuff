@@ -16,10 +16,6 @@ const listingResolver = async (obj, args, context, info) => {
 	try {
 		isAuthorized(context.req);
 		const listing = await ListingService.fetchListingById(id);
-		// TODO: Create User resolver with creator async function
-		listing.creator = async () => {
-			return await UserService.fetchUserById(listing.createdBy);
-		};
 		return listing;
 	} catch (e) {
 		throw e;
