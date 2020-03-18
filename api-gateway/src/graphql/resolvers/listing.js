@@ -1,4 +1,4 @@
-import UserService from "#root/adapters/UserService";
+import { userLoader } from '../dataloaders/userLoader'
 
 const Listing = { 
     id: (root, args, context, info) => {
@@ -14,7 +14,7 @@ const Listing = {
         return root.createdBy
     },
     creator: async (root, args, context, info) => {
-        return await UserService.fetchUserById(root.createdBy);
+        return await userLoader.load(root.createdBy);
     }
 }
 
