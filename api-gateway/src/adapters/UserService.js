@@ -64,4 +64,15 @@ export default class UserService {
 			throw e;
 		}
 	}
+
+	static async fetchUsersById(ids) {
+		try {
+			return ids.map(id => User.findByPk(id, {
+				attributes: ["id", "email"],
+				raw: true
+			}));
+		} catch (e) {
+			throw e;
+		}
+	}
 }
