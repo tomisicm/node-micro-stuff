@@ -4,8 +4,8 @@ import isAuthorized from "#root/middleware/auth/isAuthorized";
 const createListingResolver = async (obj, args, context, info) => {
 	const { listingInput } = args;
 	try {
-		isAuthorized(context.req);
-		listingInput.createdBy = context.req.user.id;
+		isAuthorized(context.user);
+		listingInput.createdBy = context.user.id;
 		const listing = await ListingService.createListing(listingInput);
 		return listing;
 	} catch (e) {
@@ -17,7 +17,7 @@ const createListingResolver = async (obj, args, context, info) => {
 const updateListingResolver = async (obj, args, context, info) => {
 	const { listingInput } = args;
 	try {
-		isAuthorized(context.req);
+		isAuthorized(context.user);
 		const listing = await ListingService.updateListing(listingInput);
 		return listing;
 	} catch (e) {
@@ -29,7 +29,7 @@ const updateListingResolver = async (obj, args, context, info) => {
 const deleteListingResolver = async (obj, args, context, info) => {
 	const { id } = args;
 	try {
-		isAuthorized(context.req);
+		isAuthorized(context.user);
 		const isDeleted = await ListingService.deleteListing(id);
 		return isDeleted;
 	} catch (e) {

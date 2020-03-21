@@ -1,6 +1,5 @@
-const isAuthorizerd = req => {
-	// console.log(req.user)
-	if (!req.user) {
+const isAuthorizerd = user => {
+	if (!user) {
 		throw new Error("Unauthorized!");
 	}
 	return true;

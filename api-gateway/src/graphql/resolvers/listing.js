@@ -1,5 +1,3 @@
-import { userLoader } from '../dataloaders/userLoader'
-
 const Listing = { 
     id: (root, args, context, info) => {
         return root.id

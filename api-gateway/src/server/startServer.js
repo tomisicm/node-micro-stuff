@@ -16,7 +16,7 @@ const apolloServer = new ApolloServer({
 	formatError: formatGraphQLErrors,
 	schema: schema,
 	context: ({ req }) => ({
-		req: req,
+		user: req.user,
 		loaders: createLoaders(req)
 	})
 });
