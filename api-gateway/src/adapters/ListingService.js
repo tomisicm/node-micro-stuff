@@ -5,36 +5,59 @@ const LISTING_SERVICE_URI = "http://listings-service:7100";
 
 export default class ListingService {
 	static async fetchAllListings() {
-		const data = await got.get(`${LISTING_SERVICE_URI}/listings`).json();
-		return data;
+		try {
+			const data = await got.get(`${LISTING_SERVICE_URI}/listings`).json();
+			return data;
+		} catch (e) {
+			throw e
+		}
 	}
 
 	static async fetchListingById(id) {
-		const data = await got.get(`${LISTING_SERVICE_URI}/listings/${id}`).json();
-		return data;
+		try {
+			const data = await got.get(`${LISTING_SERVICE_URI}/listings/${id}`).json();
+			if (data) {
+				return data;
+			}
+			throw new ResourceNotFoundError(id, "listing");
+		} catch (e) {
+			throw e
+		}
 	}
 
 	static async createListing(body) {
-		const data = await got
-			.post(`${LISTING_SERVICE_URI}/listings`, {
-				json: body,
-				responseType: "json"
-			})
-			.json();
-		return data;
+		try {
+			const data = await got
+				.post(`${LISTING_SERVICE_URI}/listings`, {
+					json: body,
+					responseType: "json"
+				})
+				.json();
+			return data;
+		} catch (e) {
+			throw e
+		}
 	}
 
 	static async updateListing(listing) {
-		const { id, title, description } = listing;
-		const data = await got
-			.put(`${LISTING_SERVICE_URI}/listings/${id}`, {
-				json: {
-					...listing
-				},
-				responseType: "json"
-			})
-			.json();
-		return data;
+		const { id } = listing;
+		try {
+			const data = await got
+				.put(`${LISTING_SERVICE_URI}/listings/${id}`, {
+					json: {
+						...listing
+					},
+					responseType: "json"
+				})
+				.json();
+			if (data.id) {
+				return data;
+			}
+			throw new ResourceNotFoundError(id, "listing");
+		} catch (e) {
+			throw e;
+		}
+		
 	}
 
 	static async deleteListing(id) {
