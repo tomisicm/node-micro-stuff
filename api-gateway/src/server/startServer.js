@@ -4,21 +4,21 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import express from "express";
 import accessEnv from "#root/helpers/accessEnv";
-
-import resolvers from "#root/graphql/resolvers";
-import typeDefs from "#root/graphql/typeDefs";
-
-import formatGraphQLErrors from "./formatGraphQLErrors";
+import schema from "#root/graphql"
 
 import isAuthenticated from "#root/middleware/auth/isAuthenticated";
+import formatGraphQLErrors from "#root/server/formatGraphQLErrors";
+import { createLoaders } from "#root/graphql/dataloaders"
 
 const PORT = accessEnv("PORT", 7000);
 
 const apolloServer = new ApolloServer({
 	formatError: formatGraphQLErrors,
-	resolvers,
-	typeDefs,
-	context: ({ req }) => ({ req })
+	schema: schema,
+	context: ({ req }) => ({
+		user: req.user,
+		loaders: createLoaders(req)
+	})
 });
 
 const app = express();
@@ -37,17 +37,6 @@ apolloServer.applyMiddleware({
 	cors: false,
 	path: "/graphql"
 });
-
-// TODO
-// app.use(function errorHandler(err, req, res, next) {
-// 	try {
-// 		console.log(err);
-// 		return res.status(500).send({ error: err });
-// 	} catch (err) {
-// 		console.log(err);
-// 		return res.status(500).send({ error: err });
-// 	}
-// });
 
 app.listen(PORT, "0.0.0.0", () => {
 	console.info(`api-gateway-service listening on port ${PORT}`);

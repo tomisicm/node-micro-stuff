@@ -1,5 +1,5 @@
-const isAuthorizerd = req => {
-	if (!req.isAuth) {
+const isAuthorizerd = user => {
+	if (!user) {
 		throw new Error("Unauthorized!");
 	}
 	return true;

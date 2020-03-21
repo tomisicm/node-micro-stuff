@@ -1,10 +1,10 @@
-import UsersService from "#root/adapters/UsersService";
+import UserService from "#root/adapters/UserService";
 
 const createUserResolver = async (obj, { userInput }) => {
 	const email = userInput.email;
 	const password = userInput.password;
 
-	return await UsersService.createUser({
+	return await UserService.createUser({
 		email,
 		password
 	});
