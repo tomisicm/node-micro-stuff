@@ -1,10 +1,8 @@
 import { userLoader } from "./userLoader"
 
 const createLoaders = (ctx) => {
-  // console.log(ctx.user)
-
   return {
-    user: userLoader
+    user: userLoader(ctx.user)
   }
 }
 

@@ -65,7 +65,7 @@ export default class UserService {
 		}
 	}
 
-	static async fetchUsersById(ids) {
+	static async fetchUsersById(_, ids) {
 		try {
 			return ids.map(id => User.findByPk(id, {
 				attributes: ["id", "email"],
