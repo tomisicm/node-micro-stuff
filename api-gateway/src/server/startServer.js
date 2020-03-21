@@ -16,7 +16,7 @@ const apolloServer = new ApolloServer({
 	formatError: formatGraphQLErrors,
 	schema: schema,
 	context: ({ req }) => ({
-		req,
+		req: req,
 		loaders: createLoaders(req)
 	})
 });
@@ -30,8 +30,8 @@ app.use(
 );
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(isAuthenticated);
 
+app.use(isAuthenticated);
 apolloServer.applyMiddleware({
 	app,
 	cors: false,
