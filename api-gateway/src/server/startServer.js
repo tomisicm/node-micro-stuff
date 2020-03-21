@@ -6,16 +6,19 @@ import express from "express";
 import accessEnv from "#root/helpers/accessEnv";
 import schema from "#root/graphql"
 
-import formatGraphQLErrors from "./formatGraphQLErrors";
-
 import isAuthenticated from "#root/middleware/auth/isAuthenticated";
+import formatGraphQLErrors from "#root/server/formatGraphQLErrors";
+import { createLoaders } from "#root/graphql/dataloaders"
 
 const PORT = accessEnv("PORT", 7000);
 
 const apolloServer = new ApolloServer({
 	formatError: formatGraphQLErrors,
 	schema: schema,
-	context: ({ req }) => ({ req })
+	context: ({ req }) => ({
+		req,
+		loaders: createLoaders(req)
+	})
 });
 
 const app = express();
@@ -27,8 +30,8 @@ app.use(
 );
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 app.use(isAuthenticated);
+
 apolloServer.applyMiddleware({
 	app,
 	cors: false,

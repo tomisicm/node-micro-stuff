@@ -14,7 +14,7 @@ const Listing = {
         return root.createdBy
     },
     creator: async (root, args, context, info) => {
-        return await userLoader.load(root.createdBy);
+        return await context.loaders.user.load(root.createdBy);
     }
 }
 
