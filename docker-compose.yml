@@ -4,14 +4,25 @@ services:
     build: "./api-gateway"
     restart: "always"
     depends_on:
+      - users-service-db
       - listings-service
-      - users-service
+      - books-service
     environment:
       - DB_URI=mysql://root:password@users-service-db/db?charset=UTF8
     ports:
       - 7000:7000
     volumes:
       - ./api-gateway:/opt/app
+
+  users-service-db:
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=db
+    image: mysql:5.7.29
+    ports:
+      - 0.0.0.0:7201:3306
+    volumes:
+      - /var/lib/mysql
 
   listings-service:
     build: "./listings-service"
@@ -34,23 +45,23 @@ services:
     ports:
       - 0.0.0.0:7200:3306
 
-  users-service:
-    build: "./users-service"
+  books-service:
+    build: "./books-service"
     depends_on:
-      - users-service-db
+      - books-service-db
     environment:
-      - DB_URI=mysql://root:password@users-service-db/db?charset=UTF8
+      - DB_URI=mysql://root:password@books-service-db/db?charset=UTF8
     ports:
-      - 7101:7101
+      - 7102:7102
     volumes:
-      - ./users-service:/opt/app
+      - ./books-service:/opt/app
 
-  users-service-db:
+  books-service-db:
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=db
-    image: mysql:5.7.29
-    ports:
-      - 0.0.0.0:7201:3306
     volumes:
       - /var/lib/mysql
+    image: mysql:5.7.29
+    ports:
+      - 0.0.0.0:7202:3306
