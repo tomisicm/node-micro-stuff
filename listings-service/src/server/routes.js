@@ -8,17 +8,17 @@ const setupRoutes = app => {
 
 	app.get("/listings/:id", async (req, res, next) => {
 		try {
-			const listing = await Listing.findByPk(req.params.id, { raw: true });
-			
-			const listingBooks = await ListingBooks.findAll({
-				where: {
-					listingId: req.params.id
-				},
-				attributes: ['bookId'],
-				raw: true
-			})
-
-			listing.booksIds = listingBooks.map(book => book.bookId)
+			const listing = await Listing.findByPk(req.params.id,
+				{ 
+					include: [
+						{
+							model: ListingBooks,
+							as: 'bookIds',
+							attributes: [['bookId','id']]
+						}
+					]
+				}
+			);
 
 			return res.json(listing);
 		} catch (e) {
@@ -65,6 +65,18 @@ const setupRoutes = app => {
 					return res.status(404).json(false);
 				}
 			});
+		} catch (e) {
+			return res.json(e);
+		}
+	});
+
+	app.post("/listings/:id/books", async (req, res, next) => {
+		try {
+			const book = await ListingBooks.create({
+				listingId: req.params.id,
+				bookId: req.body.bookId
+			});
+			return res.json(book);
 		} catch (e) {
 			return res.json(e);
 		}

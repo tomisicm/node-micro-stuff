@@ -30,8 +30,11 @@ export class ListingBooks extends Model {}
 ListingBooks.init(
 	{
 		listingId: {
-			allowNull: false,
-			type: DataTypes.UUID
+			type: DataTypes.UUID,
+			references: {
+				model: Listing,
+				key: 'id'
+			}
 		},
 		bookId: {
 			allowNull: false,
@@ -42,6 +45,12 @@ ListingBooks.init(
 		modelName: "listingBooks",
 		timestamps: false,
 		sequelize
+	}
+)
+
+Listing.hasMany(ListingBooks, 
+	{
+		as: 'bookIds'
 	}
 )
 
