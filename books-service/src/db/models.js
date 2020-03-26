@@ -15,7 +15,7 @@ Book.init(
 			allowNull: false,
 			type: DataTypes.STRING
         },
-        author: {
+        authorId: {
 			allowNull: true,
 			type: DataTypes.UUID
         },

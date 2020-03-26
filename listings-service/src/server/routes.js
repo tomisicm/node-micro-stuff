@@ -2,24 +2,27 @@ import { Listing, ListingBooks } from "#root/db/models";
 
 const setupRoutes = app => {
 	app.get("/listings", async (req, res, next) => {
-		const listings = await Listing.findAll();
+		const listings = await Listing.findAll({ 
+			include: [{
+				model: ListingBooks,
+				as: 'bookIds',
+				attributes: [['bookId','id']]
+			}]
+		});
 		return res.json(listings);
 	});
 
 	app.get("/listings/:id", async (req, res, next) => {
 		try {
-			const listing = await Listing.findByPk(req.params.id,
-				{ 
-					include: [
-						{
-							model: ListingBooks,
-							as: 'bookIds',
-							attributes: [['bookId','id']]
-						}
-					]
-				}
-			);
-
+			const listing = await Listing.findByPk(req.params.id, { 
+				include: [
+					{
+						model: ListingBooks,
+						as: 'bookIds',
+						attributes: [['bookId','id']]
+					}
+				]
+			});
 			return res.json(listing);
 		} catch (e) {
 			return res.json(e);

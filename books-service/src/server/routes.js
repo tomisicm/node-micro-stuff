@@ -2,12 +2,27 @@ import { Book } from "#root/db/models";
 import generateUUID from "#root/helpers/generateUUID";
 
 const setupRoutes = app => {
-    app.get("/books", async (req, res, next) => {
+	app.post("/books", async (req, res, next) => {
+		const { ids } = req.body
+		try {
+			const books = await Book.findAll({
+				where: {
+					id: ids
+				},
+				raw: true
+			})
+			return res.json(books)
+		} catch (e) {
+			return res.json(e);
+		}
+	});
+
+	app.get("/books/all", async (req, res, next) => {
 		const books = await Book.findAll();
 		return res.json(books);
 	});
 
-	app.get("/books/:id", async (req, res, next) => {
+	app.get("/book/:id", async (req, res, next) => {
 		try {
 			const book = await Book.findByPk(req.params.id);
 			return res.json(book);
@@ -16,7 +31,7 @@ const setupRoutes = app => {
 		}
 	});
 
-	app.post("/books", async (req, res, next) => {
+	app.post("/book", async (req, res, next) => {
 		try {
 			const book = await Book.create({
         ...req.body,
@@ -28,7 +43,7 @@ const setupRoutes = app => {
 		}
 	});
 
-	app.put("/books/:id", async (req, res, next) => {
+	app.put("/book/:id", async (req, res, next) => {
 		try {
 			const book = await Book.findByPk(req.params.id);
 
@@ -49,7 +64,7 @@ const setupRoutes = app => {
 		}
 	});
 
-	app.delete("/books/:id", async (req, res, next) => {
+	app.delete("/book/:id", async (req, res, next) => {
 		try {
 			await Book.destroy({
 				where: { id: req.params.id }
