@@ -1,4 +1,4 @@
-import { Listing } from "#root/db/models";
+import { Listing, ListingBooks } from "#root/db/models";
 
 const setupRoutes = app => {
 	app.get("/listings", async (req, res, next) => {
@@ -8,7 +8,18 @@ const setupRoutes = app => {
 
 	app.get("/listings/:id", async (req, res, next) => {
 		try {
-			const listing = await Listing.findByPk(req.params.id);
+			const listing = await Listing.findByPk(req.params.id, { raw: true });
+			
+			const listingBooks = await ListingBooks.findAll({
+				where: {
+					listingId: req.params.id
+				},
+				attributes: ['bookId'],
+				raw: true
+			})
+
+			listing.booksIds = listingBooks.map(book => book.bookId)
+
 			return res.json(listing);
 		} catch (e) {
 			return res.json(e);

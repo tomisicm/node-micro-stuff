@@ -17,6 +17,10 @@ module.exports.up = (queryInterface, DataTypes) => {
                 allowNull: false,
                 type: DataTypes.TEXT,
             },
+            createdBy: {
+                allowNull: false,
+                type: DataTypes.UUID
+            },
             createdAt: {
                 allowNull: false,
                 type: DataTypes.DATE
@@ -36,3 +40,4 @@ module.exports.up = (queryInterface, DataTypes) => {
     );
 };
 
+module.exports.down = queryInterface => queryInterface.dropTable("listings");

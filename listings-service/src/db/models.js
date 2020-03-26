@@ -25,4 +25,24 @@ Listing.init(
 	}
 );
 
+export class ListingBooks extends Model {}
+
+ListingBooks.init(
+	{
+		listingId: {
+			allowNull: false,
+			type: DataTypes.UUID
+		},
+		bookId: {
+			allowNull: false,
+			type: DataTypes.UUID
+		}
+	},
+	{
+		modelName: "listingBooks",
+		timestamps: false,
+		sequelize
+	}
+)
+
 export default Listing;
