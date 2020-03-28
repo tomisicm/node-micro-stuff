@@ -1,10 +1,12 @@
-import { Listing, ListingBooks } from "#root/db/models";
+import { sequelize } from "#root/models"
+
+const { models } = sequelize
 
 const setupRoutes = app => {
 	app.get("/listings", async (req, res, next) => {
-		const listings = await Listing.findAll({ 
+		const listings = await models.Listing.findAll({ 
 			include: [{
-				model: ListingBooks,
+				model: models.ListingBooks,
 				as: 'bookIds',
 				attributes: [['bookId','id']]
 			}]
@@ -14,10 +16,10 @@ const setupRoutes = app => {
 
 	app.get("/listings/:id", async (req, res, next) => {
 		try {
-			const listing = await Listing.findByPk(req.params.id, { 
+			const listing = await models.Listing.findByPk(req.params.id, { 
 				include: [
 					{
-						model: ListingBooks,
+						model: models.ListingBooks,
 						as: 'bookIds',
 						attributes: [['bookId','id']]
 					}
@@ -31,7 +33,7 @@ const setupRoutes = app => {
 
 	app.post("/listings", async (req, res, next) => {
 		try {
-			const listing = await Listing.create(req.body);
+			const listing = await models.Listing.create(req.body);
 			return res.json(listing);
 		} catch (e) {
 			return res.json(e);
@@ -40,7 +42,7 @@ const setupRoutes = app => {
 
 	app.put("/listings/:id", async (req, res, next) => {
 		try {
-			const listing = await Listing.findByPk(req.params.id);
+			const listing = await models.Listing.findByPk(req.params.id);
 
 			if (listing) {
 				listing.title = req.body.title;
@@ -59,15 +61,13 @@ const setupRoutes = app => {
 
 	app.delete("/listings/:id", async (req, res, next) => {
 		try {
-			const listing = await Listing.destroy({
+			const listing = await models.Listing.destroy({
 				where: { id: req.params.id }
-			}).then(function(deletedRecord) {
-				if (deletedRecord === 1) {
-					return res.status(200).json(true);
-				} else {
-					return res.status(404).json(false);
-				}
-			});
+			})
+			if (listing) {
+				return res.status(200).json(true);
+			} 
+			return res.status(404).json(false);
 		} catch (e) {
 			return res.json(e);
 		}
@@ -75,7 +75,7 @@ const setupRoutes = app => {
 
 	app.post("/listings/:id/books", async (req, res, next) => {
 		try {
-			const book = await ListingBooks.create({
+			const book = await models.ListingBooks.create({
 				listingId: req.params.id,
 				bookId: req.body.bookId
 			});
