@@ -42,20 +42,30 @@ const setupRoutes = app => {
 
 	app.put("/listings/:id", async (req, res, next) => {
 		try {
-			const listing = await models.Listing.findByPk(req.params.id);
+			const listing = await models.Listing.findByPk(req.params.id, { 
+				include: [
+					{
+						model: models.ListingBooks,
+						as: 'bookIds',
+						attributes: [['bookId','id']]
+					}
+				]
+			})
 
 			if (listing) {
-				listing.title = req.body.title;
-				listing.description = req.body.description;
+				listing.title = req.body.title
+				listing.description = req.body.description
 				await listing.save({
 					fields: ["title", "description"]
-				});
+				})
+				await listing.updateAssociatedBooks(req.body.bookIds)
 				return res.json(listing);
 			}
 
 			return res.json({});
 		} catch (e) {
-			return res.json(e);
+			console.log(e)
+			return res.json(e)
 		}
 	});
 
@@ -73,17 +83,17 @@ const setupRoutes = app => {
 		}
 	});
 
-	app.post("/listings/:id/books", async (req, res, next) => {
-		try {
-			const book = await models.ListingBooks.create({
-				listingId: req.params.id,
-				bookId: req.body.bookId
-			});
-			return res.json(book);
-		} catch (e) {
-			return res.json(e);
-		}
-	});
+	// app.post("/listings/:id/books", async (req, res, next) => {
+	// 	try {
+	// 		const book = await models.ListingBooks.create({
+	// 			listingId: req.params.id,
+	// 			bookId: req.body.bookId
+	// 		});
+	// 		return res.json(book);
+	// 	} catch (e) {
+	// 		return res.json(e);
+	// 	}
+	// });
 };
 
 export default setupRoutes;

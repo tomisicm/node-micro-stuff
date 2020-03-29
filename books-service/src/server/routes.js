@@ -66,15 +66,13 @@ const setupRoutes = app => {
 
 	app.delete("/book/:id", async (req, res, next) => {
 		try {
-			await Book.destroy({
+			const book = await Book.destroy({
 				where: { id: req.params.id }
-			}).then(function(deletedRecord) {
-				if (deletedRecord === 1) {
-					return res.status(200).json(true);
-				} else {
-					return res.status(404).json(false);
-				}
-			});
+			})
+			if (book) {
+				return res.status(200).json(true);
+			} 
+			return res.status(404).json(false);
 		} catch (e) {
 			return res.json(e);
 		}
