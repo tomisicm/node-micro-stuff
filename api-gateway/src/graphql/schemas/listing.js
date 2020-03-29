@@ -13,6 +13,7 @@ export const typeDef = `
     id: ID
     title: String!
     description: String!
+    bookIds: [String!]
   }
 
   type Mutation {

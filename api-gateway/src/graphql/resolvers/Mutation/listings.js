@@ -2,7 +2,7 @@ import ListingService from "#root/adapters/ListingService";
 import isAuthorized from "#root/middleware/auth/isAuthorized";
 
 const createListingResolver = async (obj, args, context, info) => {
-	const { listingInput } = args;
+	const { listingInput } = args
 	try {
 		isAuthorized(context.user);
 		listingInput.createdBy = context.user.id;
