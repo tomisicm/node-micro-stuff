@@ -4,6 +4,7 @@ import express from "express";
 
 import accessEnv from "#root/helpers/accessEnv";
 import setupRoutes from "./routes";
+import { connect } from "./events-service"
 
 const PORT = accessEnv("PORT", 7102);
 
@@ -26,6 +27,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, "0.0.0.0", () => {
+app.listen(PORT, "0.0.0.0", async () => {
+  await connect()
   console.info(`Books service listening on port ${PORT}`);
 });

@@ -28,6 +28,7 @@ services:
     build: "./listings-service"
     depends_on:
       - listings-service-db
+      - events-service
     environment:
       - DB_URI=mysql://root:password@listings-service-db/db?charset=UTF8
     ports:
@@ -49,6 +50,7 @@ services:
     build: "./books-service"
     depends_on:
       - books-service-db
+      - events-service
     environment:
       - DB_URI=mysql://root:password@books-service-db/db?charset=UTF8
     ports:
@@ -65,3 +67,18 @@ services:
     image: mysql:5.7.29
     ports:
       - 0.0.0.0:7202:3306
+
+  events-service:
+    image: rabbitmq:3-management
+    environment: 
+      - RABBITMQ_ERLANG_COOKIE='secretcookie'
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=password
+    volumes:
+      - /var/lib/rabbitmq
+    ports:
+      - 4369:4369
+      - 5671:5671
+      - 5672:5672
+      - 15672:15672
+      - 25672:25672
