@@ -75,7 +75,7 @@ const setupRoutes = app => {
 			}
 
 			if (book) {
-				await sendToBookJobQueue(msg)
+				sendToBookJobQueue(msg)
 				return res.status(200).json(true)
 			}
 			return res.status(404).json(false)
