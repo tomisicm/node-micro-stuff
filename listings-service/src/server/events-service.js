@@ -13,15 +13,12 @@ const connectAndListen = async function () {
 function consume ({ connection, channel }) {
     return new Promise((resolve, reject) => {
         channel.consume('book-jobs', async function (msg) {
-            console.log(msg)
+            let data = JSON.parse(msg.content.toString())
+            const destroyedItems = await ListingBooksService.destroy(data)
 
-            let msgBody = msg.content.toString()
-            let data = JSON.parse(msgBody)
-            let requestData = data.requestData
-
-            ListingBooksService.destroy(msg)
-  
-            await channel.ack(msg)
+            if (destroyedItems) {
+                await channel.ack(msg)
+            }
         })
   
         connection.on('close', (err) => {
