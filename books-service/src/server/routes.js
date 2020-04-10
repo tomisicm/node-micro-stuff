@@ -1,9 +1,11 @@
-import { Book } from "#root/db/models"
-import generateUUID from "#root/helpers/generateUUID"
-import { sendToBookJobQueue } from "./events-service"
+import { sequelize } from '#root/models'
+import generateUUID from '#root/helpers/generateUUID'
+import { sendToBookJobQueue } from './events-service'
+
+const { models: { Book } } = sequelize
 
 const setupRoutes = app => {
-	app.post("/books", async (req, res, next) => {
+	app.post('/books', async (req, res, next) => {
 		const { ids } = req.body
 		try {
 			const books = await Book.findAll({
@@ -18,12 +20,12 @@ const setupRoutes = app => {
 		}
 	})
 
-	app.get("/books/all", async (req, res, next) => {
+	app.get('/books/all', async (req, res, next) => {
 		const books = await Book.findAll()
 		return res.json(books)
 	})
 
-	app.get("/book/:id", async (req, res, next) => {
+	app.get('/book/:id', async (req, res, next) => {
 		try {
 			const book = await Book.findByPk(req.params.id)
 			return res.json(book)
@@ -32,7 +34,7 @@ const setupRoutes = app => {
 		}
 	})
 
-	app.post("/book", async (req, res, next) => {
+	app.post('/book', async (req, res, next) => {
 		try {
 			const book = await Book.create({
 				...req.body,
@@ -44,7 +46,7 @@ const setupRoutes = app => {
 		}
 	})
 
-	app.put("/book/:id", async (req, res, next) => {
+	app.put('/book/:id', async (req, res, next) => {
 		try {
 			const book = await Book.findByPk(req.params.id)
 
@@ -52,7 +54,7 @@ const setupRoutes = app => {
 				book.title = req.body.title
 				book.description = req.body.description
 				await book.save({
-					fields: ["title", "author"]
+					fields: ['title', 'author']
 				})
 				return res.json(book)
 			}
@@ -63,7 +65,7 @@ const setupRoutes = app => {
 		}
 	})
 
-	app.delete("/book/:id", async (req, res, next) => {
+	app.delete('/book/:id', async (req, res, next) => {
 		try {
 			const book = await Book.destroy({
 				where: { id: req.params.id }
@@ -71,7 +73,7 @@ const setupRoutes = app => {
 
 			const msg = {
 				id: req.params.id,
-				event: "destroy"
+				event: 'destroy'
 			}
 
 			if (book) {

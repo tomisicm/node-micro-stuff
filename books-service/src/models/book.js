@@ -1,12 +1,9 @@
-import { DataTypes, Model } from "sequelize";
+import _ from 'lodash'
 
-import sequelize from "./connection";
+module.exports = (sequelize, DataTypes) => {
 
-export class Book extends Model {}
-
-Book.init(
-    {
-        id: {
+	const Book = sequelize.define('Book', {
+		id: {
             allowNull: false,
             primaryKey: true,
             type: DataTypes.UUID
@@ -35,11 +32,14 @@ Book.init(
             allowNull: true,
             type: DataTypes.DATE
         }
-    },
-	{
+	}, {
+		tableName: "books",
 		modelName: "books",
-		sequelize
-	}
-);
+		timestamps: true
+	});
 
-export default Book;
+	
+
+	
+	return Book;
+}
