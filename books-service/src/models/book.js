@@ -12,6 +12,13 @@ module.exports = (sequelize, DataTypes) => {
 			allowNull: false,
 			type: DataTypes.STRING
         },
+        categoryId : {
+            type: DataTypes.UUID,
+            references: {
+              model: sequelize.models.Category,
+              key: 'id'
+            }
+        },
         authorId: {
 			allowNull: true,
 			type: DataTypes.UUID

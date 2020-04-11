@@ -14,6 +14,9 @@ module.exports = {
         name: 'Calendars'
       },
       {
+        name: `Children's Books`
+      },
+      {
         name: 'Comics & Graphic Novels'
       },
       {
@@ -89,13 +92,16 @@ module.exports = {
         name: 'Travel'
       },
       {
+        name: 'Gay & Lesbian'
+      },
+      {
         name: 'Education & Teaching'
       }
     ], {})
   },
   
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('categories')
+    return queryInterface.dropTable('categories')
   }
 }
   

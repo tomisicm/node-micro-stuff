@@ -1,7 +1,7 @@
 module.exports.up = (queryInterface, DataTypes) => {
 
     return queryInterface.createTable(
-        "books", 
+        'books', 
         {
             id: {
                 allowNull: false,
@@ -11,6 +11,10 @@ module.exports.up = (queryInterface, DataTypes) => {
             title: {
                 allowNull: false,
                 type: DataTypes.STRING
+            },
+            categoryId: {
+                allowNull: false,
+                type: DataTypes.UUID
             },
             authorId: {
                 allowNull: true,
@@ -34,10 +38,10 @@ module.exports.up = (queryInterface, DataTypes) => {
             }
         },
         {
-            charset: "utf8",
+            charset: 'utf8',
             timestamps: false
         }
-    );
-};
+    )
+}
 
-module.exports.down = queryInterface => queryInterface.dropTable("books");
+module.exports.down = queryInterface => queryInterface.dropTable('books')
