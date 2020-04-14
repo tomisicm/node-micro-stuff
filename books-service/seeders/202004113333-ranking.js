@@ -2,7 +2,7 @@ const uuidv4 = require('uuid')
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    const ratings = getArrayOfRatings(5000)
+    const ratings = getArrayOfRatings(5, 10)
     return queryInterface.bulkInsert('ratings', ratings, {})
   },
 
@@ -12,29 +12,23 @@ module.exports = {
 }
 
 function getArrayOfRatings(size, userPool) {
-  let ratings = []
-  let users = getUsers(userPool)
+  const ratings = []
+  const users = getUsers(userPool)
 
   users.forEach(user => {
-    let userRatings = []
+    // TODO: generate vector of zeros then replace certain indices
+    let userRatings = Array
+      .apply(null, { length: size })
+      .map(() => {
+        return {
+          userId: user,
+          bookId: Math.floor(Math.random() * 5001).toString(),
+          value: generateRandomValue()
+        }
+      })
 
-    // TODO: 
-    // generate array of user reviews for a list of movies
-
-    ratings.push({
-      userId: user,
-      bookId: Math.floor(Math.random() * Math.floor(5001)),
-      value: Math.floor(Math.random() * Math.floor(11))
-    })
+    ratings.push(...userRatings)
   })
-
-  for (let i=0; i<size; i+=1) {
-    ratings.push({
-      userId: uuidv4(),
-      bookId: Math.floor(Math.random() * Math.floor(5001)),
-      value: Math.floor(Math.random() * Math.floor(11))
-    })
-  }
 
   return ratings
 }
@@ -47,4 +41,8 @@ function getUsers(size = 4000) {
   }
 
   return users
+}
+
+function generateRandomValue() {
+  return Math.random() < 0.7 ? 0 : Math.floor(Math.random() * 11)
 }
