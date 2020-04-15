@@ -1,6 +1,6 @@
 module.exports.up = (queryInterface, DataTypes) => {
     return queryInterface.createTable(
-        'metaBookCategories', 
+        'metadata-categories', 
         {
             categoryId: {
                 type: DataTypes.INTEGER.UNSIGNED,
@@ -22,10 +22,10 @@ module.exports.up = (queryInterface, DataTypes) => {
         },
         {
             charset: 'utf8',
-            tableName: 'metaBookCategories',
+            tableName: 'metadata-categories',
             timestamps: false
         }
     )
 }
 
-module.exports.down = queryInterface => queryInterface.dropTable('metaBookCategories')
+module.exports.down = queryInterface => queryInterface.dropTable('metadata-categories')

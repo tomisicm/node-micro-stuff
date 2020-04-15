@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
 
-	const MetaBookCategory = sequelize.define('MetaBookCategory', {
+	const CategoryMetadata = sequelize.define('CategoryMetadata', {
 		categoryId: {
 			type: DataTypes.INTEGER.UNSIGNED,
 			references: {
@@ -17,10 +17,14 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.DOUBLE
         }
 	}, {
-		tableName: 'metaBookCategories',
-		modelName: 'metaBookCategories',
+		tableName: 'metadata-categories',
+		modelName: 'metadata-categories',
 		timestamps: false
-    })
+	})
 
-	return MetaBookCategory
+	CategoryMetadata.removeAttribute('id')
+
+	CategoryMetadata.belongsTo(sequelize.models.Category, { through: 'categories', foreignKey: 'categoryId' })
+
+	return CategoryMetadata
 }

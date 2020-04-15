@@ -1,6 +1,6 @@
 import { sequelize } from '#root/models'
 
-const { models: { Book, Category } } = sequelize
+const { models: { Book, Category, CategoryMetadata } } = sequelize
 
 export default class CategoriesService {
     static async initializeCategoriesFrequencies() {
@@ -10,17 +10,21 @@ export default class CategoriesService {
                 .map(async (category) => {
                     return {
                         categoryId: category.id,
-                        count: await getBooksCount(category.id)
+                        totalCount: await getBooksCount(category.id)
                     }
                 })
 
             const totalBooks = bookCounts
-                .map(bookOb => bookOb.count)
+                .map(bookOb => bookOb.totalCount)
                 .reduce((acc, currentVal) => { return acc + currentVal })
+                
+            bookCounts.forEach(book => {
+                book.relativeFrequency = book.totalCount / totalBooks
+            })
 
-            console.log(totalBooks)
-            console.log(bookCounts)
-            
+            const categoryMetadata = await CategoryMetadata.bulkCreate(bookCounts)
+
+            console.log(categoryMetadata)
         } catch (e) {
             console.error(e)
         }
