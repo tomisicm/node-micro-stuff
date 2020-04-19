@@ -1,7 +1,7 @@
 module.exports.up = (queryInterface, DataTypes) => {
 
     return queryInterface.createTable(
-        "users", 
+        'users', 
         {
             id: {
                 allowNull: false,
@@ -19,21 +19,25 @@ module.exports.up = (queryInterface, DataTypes) => {
             },
             createdAt: {
                 allowNull: false,
-                type: DataTypes.DATE
+                type: DataTypes.DATE,
+                defaultValue: new Date()
             },
             updatedAt: {
                 allowNull: false,
-                type: DataTypes.DATE
+                type: DataTypes.DATE,
+                defaultValue: new Date()
             },
             deletedAt: {
                 allowNull: true,
-                type: DataTypes.DATE
+                type: DataTypes.DATE,
+                defaultValue: null
             }
         },
         {
-            charset: "utf8"
+            timestamps: true,
+            charset: 'utf8'
         }
-    );
-};
+    )
+}
 
-module.exports.down = queryInterface => queryInterface.dropTable("users");
+module.exports.down = queryInterface => queryInterface.dropTable('users')
