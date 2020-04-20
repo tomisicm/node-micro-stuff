@@ -19,9 +19,9 @@ module.exports = (sequelize, DataTypes) => {
               key: 'id'
             }
         },
-        authorId: {
+        author: {
 			allowNull: true,
-			type: DataTypes.UUID
+			type: DataTypes.STRING
         },
         createdBy: {
 			allowNull: false,

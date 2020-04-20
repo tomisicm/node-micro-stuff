@@ -16,9 +16,9 @@ module.exports.up = (queryInterface, DataTypes) => {
                 allowNull: false,
                 type: DataTypes.UUID
             },
-            authorId: {
+            author: {
                 allowNull: true,
-                type: DataTypes.UUID
+                type: DataTypes.STRING
             },
             createdBy: {
                 allowNull: false,
