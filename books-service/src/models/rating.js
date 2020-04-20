@@ -11,9 +11,27 @@ module.exports = (sequelize, DataTypes) => {
 			allowNull: false,
 			type: DataTypes.STRING
         },
-        bookId: {
-			allowNull: false,
-			type: DataTypes.STRING
+		bookId : {
+            type: DataTypes.UUID,
+            references: {
+				model: {
+					tableName: 'books',
+					schema: 'schema'
+				},
+				key: 'id'
+			},
+			allowNull: false
+        },
+		categoryId : {
+            type: DataTypes.INTEGER.UNSIGNED,
+            references: {
+				model: {
+					tableName: 'books',
+					schema: 'schema'
+				},
+				key: 'id'
+			},
+			allowNull: false
         },
         value: {
             type: DataTypes.INTEGER,

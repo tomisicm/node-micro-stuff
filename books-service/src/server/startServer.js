@@ -1,33 +1,34 @@
-import bodyParser from "body-parser";
-import cors from "cors";
-import express from "express";
+import bodyParser from 'body-parser'
+import cors from 'cors'
+import express from 'express'
+import accessEnv from '#root/helpers/accessEnv'
 
-import accessEnv from "#root/helpers/accessEnv";
-import setupRoutes from "./routes";
-import { connect } from "./events-service"
+import setupRoutes from './routes'
 
-const PORT = accessEnv("PORT", 7102);
+import { connect } from './events-service'
 
-const app = express();
+const PORT = accessEnv('PORT', 7102)
 
-app.use(bodyParser.json());
+const app = express()
+
+app.use(bodyParser.json())
 
 app.use(
   cors({
     origin: (origin, cb) => cb(null, true),
     credentials: true
   })
-);
+)
 
-setupRoutes(app);
+setupRoutes(app)
 
 app.use((err, req, res, next) => {
   return res.status(500).json({
     message: err.message
-  });
-});
+  })
+})
 
-app.listen(PORT, "0.0.0.0", async () => {
+app.listen(PORT, '0.0.0.0', async () => {
   await connect()
-  console.info(`Books service listening on port ${PORT}`);
-});
+  console.info(`Books service listening on port ${PORT}`)
+})

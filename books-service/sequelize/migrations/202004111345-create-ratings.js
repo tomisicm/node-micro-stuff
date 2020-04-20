@@ -11,11 +11,27 @@ module.exports.up = (queryInterface, DataTypes) => {
             },
             userId: {
                 allowNull: false,
-                type: DataTypes.STRING
+                type: DataTypes.UUID
             },
             bookId: {
-                allowNull: false,
-                type: DataTypes.STRING
+                type: DataTypes.UUID,
+                references: {
+                    model: {
+                        tableName: 'books'
+                    },
+                    key: 'id'
+                },
+                allowNull: false
+            },
+            categoryId: {
+                type: DataTypes.INTEGER.UNSIGNED,
+                references: {
+                    model: {
+                        tableName: 'categories'
+                    },
+                    key: 'id'
+                },
+                allowNull: false
             },
             value: {
                 type: DataTypes.INTEGER,

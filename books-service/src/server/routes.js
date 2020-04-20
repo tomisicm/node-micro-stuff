@@ -1,90 +1,20 @@
-import { sequelize } from '#root/models'
-import generateUUID from '#root/helpers/generateUUID'
-import { sendToBookJobQueue } from './events-service'
+// import RatingsService from '#root/services/ratings-service'
+import MatricesService from '#root/services/data/matrices-service'
 
-const { models: { Book } } = sequelize
+import importDataRouter from '../routers/import-data-jobs'
+import booksRouter from '../routers/books'
 
+// TODO this puppy should collect all routes
 const setupRoutes = app => {
-	app.post('/books', async (req, res, next) => {
-		const { ids } = req.body
-		try {
-			const books = await Book.findAll({
-				where: {
-					id: ids
-				},
-				raw: true
-			})
-			return res.json(books)
-		} catch (e) {
-			return res.json(e)
-		}
-	})
 
-	app.get('/books/all', async (req, res, next) => {
-		const books = await Book.findAll()
-		return res.json(books)
-	})
+	app.use('/api/', booksRouter)
+	app.use('/api/', importDataRouter)
 
-	app.get('/book/:id', async (req, res, next) => {
-		try {
-			const book = await Book.findByPk(req.params.id)
-			return res.json(book)
-		} catch (e) {
-			return res.json(e)
-		}
-	})
+	// app.post('/categories-recalculate', async (req, res, next) => {
+	// 	MatricesService.getRatingMatrixData()
 
-	app.post('/book', async (req, res, next) => {
-		try {
-			const book = await Book.create({
-				...req.body,
-				id: generateUUID()
-      		})
-			return res.json(book)
-		} catch (e) {
-			return res.json(e)
-		}
-	})
-
-	app.put('/book/:id', async (req, res, next) => {
-		try {
-			const book = await Book.findByPk(req.params.id)
-
-			if (book) {
-				book.title = req.body.title
-				book.description = req.body.description
-				await book.save({
-					fields: ['title', 'author']
-				})
-				return res.json(book)
-			}
-
-			return res.json({})
-		} catch (e) {
-			return res.json(e)
-		}
-	})
-
-	app.delete('/book/:id', async (req, res, next) => {
-		try {
-			const book = await Book.destroy({
-				where: { id: req.params.id }
-			})
-
-			const msg = {
-				id: req.params.id,
-				event: 'destroy'
-			}
-
-			if (book) {
-				sendToBookJobQueue(msg)
-				return res.status(200).json(true)
-			}
-			return res.status(404).json(false)
-		} catch (e) {
-			return res.json(e)
-		}
-	})
+	// 	return res.status(200).json(true)
+	// })
 }
 
 export default setupRoutes
