@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 module.exports = (sequelize, DataTypes) => {
 
 	const Book = sequelize.define('Book', {
@@ -40,13 +38,12 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.DATE
         }
 	}, {
-		tableName: "books",
-		modelName: "books",
+		tableName: 'books',
+		modelName: 'books',
 		timestamps: true
-	});
-
+	})
 	
 
 	
-	return Book;
+	return Book
 }

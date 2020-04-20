@@ -1,3 +1,5 @@
+// sequelize db:migrate:undo --name 202003051440-create-books
+
 module.exports.up = (queryInterface, DataTypes) => {
 
     return queryInterface.createTable(

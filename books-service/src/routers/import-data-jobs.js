@@ -8,7 +8,7 @@ const router = Router()
 
 router.route('/import-books').post(async (req, res, next) => {
 
-//    importData(5)
+   importData(10000)
 
    return res.json(1)
 })
