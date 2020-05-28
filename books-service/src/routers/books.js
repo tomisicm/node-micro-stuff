@@ -2,10 +2,22 @@ import { Router } from 'express'
 import { sequelize } from '#root/models'
 import generateUUID from '#root/helpers/generateUUID'
 import { sendToBookJobQueue } from '#root/server/events-service'
+import SearchBookService from '#root/services/search-books-servce'
+import RecommendationBookService from '#root/services/recommendation-books-service'
 
 const { models: { Book } } = sequelize
 
 const router = Router()
+
+router.route('/books/search').post(async (req, res, next) => {
+    const data = SearchBookService.searchByString(req.body)
+    return res.json({ books: data })
+})
+
+router.route('/books/recommendation').post(async (req, res, next) => {
+    const data = await RecommendationBookService.getBooks(req.body)
+    return res.json({ recommended: data })
+})
 
 router.route('/books/some').post(async (req, res, next) => {
     const { ids } = req.body
