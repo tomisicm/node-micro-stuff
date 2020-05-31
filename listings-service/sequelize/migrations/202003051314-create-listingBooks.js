@@ -7,7 +7,7 @@ module.exports.up = (queryInterface, DataTypes) => {
 				allowNull: false,
 				autoIncrement: true,
 				primaryKey: true,
-				type: DataTypes.INTEGER
+				type: DataTypes.INTEGER.UNSIGNED
 			},
 			listingId: {
 				allowNull: false,

@@ -1,24 +1,31 @@
 import { Application, Request, Response } from 'express'
-import { sequelize } from '#root/models'
+import sequelize from './../db/connection'
+import { Listing } from '#root/models/Listing'
 
 const { models } = sequelize
 
 const setupRoutes = (app: Application):void => {
 	app.get('/listings', async (req: Request, res: Response) => {
-		const listings = await models.Listing.findAll({ 
-			include: [{
-				model: models.ListingBooks,
-				as: 'bookIds',
-				attributes: [['bookId','id']]
-			}]
-		})
+		try {
+			const listings = await Listing.findAll({ 
+				include: [
+					{
+						model: models.ListingBooks,
+						as: 'bookIds',
+						attributes: [['bookId','id']]
+					}
+				]
+			})
+			return res.json(listings)
+		} catch(e) {
+			return res.json(e)
+		}
 
-		return res.json(listings)
 	})
 
 	app.get('/listings/:id', async (req: Request, res: Response) => {
 		try {
-			const listing = await models.Listing.findByPk(req.params.id, { 
+			const listing = await Listing.findByPk(req.params.id, { 
 				include: [
 					{
 						model: models.ListingBooks,
@@ -36,7 +43,7 @@ const setupRoutes = (app: Application):void => {
 
 	app.post('/listings', async (req: Request, res: Response) => {
 		try {
-			const listing = await models.Listing.create(req.body)
+			const listing: Listing = await Listing.create(req.body)
 			return res.json(listing)
 		} catch (e) {
 			return res.json(e)
@@ -45,7 +52,7 @@ const setupRoutes = (app: Application):void => {
 
 	app.put('/listings/:id', async (req: Request, res: Response) => {
 		try {
-			const listing = await models.Listing.findByPk(req.params.id, { 
+			const listing = await Listing.findByPk(req.params.id, { 
 				include: [
 					{
 						model: models.ListingBooks,
@@ -74,7 +81,7 @@ const setupRoutes = (app: Application):void => {
 
 	app.delete('/listings/:id', async (req: Request, res: Response) => {
 		try {
-			const listing = await models.Listing.destroy({
+			const listing = await Listing.destroy({
 				where: { id: req.params.id }
 			})
 			if (listing) {
