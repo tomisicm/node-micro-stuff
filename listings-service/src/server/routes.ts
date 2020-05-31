@@ -1,19 +1,26 @@
 import { Application, Request, Response } from 'express'
-import { sequelize } from '#root/models'
+import sequelize from './../db/connection'
 
 const { models } = sequelize
 
+
 const setupRoutes = (app: Application):void => {
 	app.get('/listings', async (req: Request, res: Response) => {
-		const listings = await models.Listing.findAll({ 
-			include: [{
-				model: models.ListingBooks,
-				as: 'bookIds',
-				attributes: [['bookId','id']]
-			}]
-		})
+		try {
+			const listings = await models.Listing.findAll({ 
+				include: [
+					{
+						model: models.ListingBooks,
+						as: 'bookIds',
+						attributes: [['bookId','id']]
+					}
+				]
+			})
+			return res.json(listings)
+		} catch(e) {
+			return res.json(e)
+		}
 
-		return res.json(listings)
 	})
 
 	app.get('/listings/:id', async (req: Request, res: Response) => {

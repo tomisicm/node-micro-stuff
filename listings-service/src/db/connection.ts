@@ -1,4 +1,6 @@
 import { Sequelize } from 'sequelize-typescript'
+import { Listing } from './../models/Listing'
+import { ListingBooks } from './../models/ListingBooks'
 
 import accessEnv from '#root/helpers/accessEnv'
 
@@ -11,6 +13,7 @@ const sequelize = new Sequelize(
 			charset: 'utf8',
 			multipleStatements: true
 		},
+		models:[Listing, ListingBooks],
 		logging: false
 	}
 )
