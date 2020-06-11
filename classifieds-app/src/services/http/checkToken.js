@@ -1,13 +1,13 @@
-import { http, setAuthHeader } from "./http-service";
+import { http, setAuthHeader } from './http-service'
 
 const checkToken = () => {
-  let token = localStorage.getItem("token");
+  const token = localStorage.getItem('token')
 
   if (token) {
-    setAuthHeader(token);
+    setAuthHeader(token)
   } else {
-    delete http.defaults.headers.common["Authorization"];
+    delete http.defaults.headers.common.Authorization
   }
-};
+}
 
-export default checkToken;
+export default checkToken

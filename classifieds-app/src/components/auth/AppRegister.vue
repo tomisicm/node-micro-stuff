@@ -7,12 +7,12 @@
 <script>
 export default {
   props: {},
-  data() {
+  data () {
     return {
-    };
+    }
   },
   methods: {},
   computed: {},
-  name: "Login"
-};
+  name: 'Login'
+}
 </script>

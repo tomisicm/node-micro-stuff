@@ -1,23 +1,23 @@
-import Vue from "vue";
-import Router from "vue-router";
+import Vue from 'vue'
+import Router from 'vue-router'
 
-import AppAuth from "@/views/AppAuth";
-import AppLogin from "@/components/auth/AppLogin";
-import AppRegister from "@/components/auth/AppRegister";
+import AppAuth from '@/views/AppAuth'
+import AppLogin from '@/components/auth/AppLogin'
+import AppRegister from '@/components/auth/AppRegister'
 
-Vue.use(Router);
+Vue.use(Router)
 
 const router = new Router({
-  mode: "history",
+  mode: 'history',
   routes: [
     {
-      path: "/",
-      name: "auth",
+      path: '/',
+      name: 'auth',
       component: AppAuth,
       children: [
         {
-          name: "login",
-          path: "login",
+          name: 'login',
+          path: 'login',
           props: true,
           component: AppLogin,
           meta: {
@@ -25,8 +25,8 @@ const router = new Router({
           }
         },
         {
-          name: "register",
-          path: "register",
+          name: 'register',
+          path: 'register',
           props: true,
           component: AppRegister,
           meta: {
@@ -36,6 +36,6 @@ const router = new Router({
       ]
     }
   ]
-});
+})
 
-export default router;
+export default router

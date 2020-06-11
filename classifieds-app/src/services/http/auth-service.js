@@ -1,51 +1,51 @@
-import { http, setAuthHeader } from "./http-service";
-import checkToken from "./checkToken";
+import { http, setAuthHeader } from './http-service'
+import checkToken from './checkToken'
 
 class AuthService {
-  login(query) {
+  login (query) {
     return http
-      .post("", JSON.stringify({ query }))
+      .post('', JSON.stringify({ query }))
       .then(response => {
-        this.loggingIn(response.data);
+        this.loggingIn(response.data)
       })
       .catch(error => {
-        throw error;
-      });
+        throw error
+      })
   }
 
-  register(query) {
+  register (query) {
     return http
-      .post("", JSON.stringify({ query }))
+      .post('', JSON.stringify({ query }))
       .then(response => {
-        return response;
+        return response
       })
       .catch(error => {
-        throw error;
-      });
+        throw error
+      })
   }
 
-  logout() {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-    localStorage.removeItem("id");
-    this.setAuthHeaders();
-    return Promise.resolve();
+  logout () {
+    localStorage.removeItem('user')
+    localStorage.removeItem('token')
+    localStorage.removeItem('id')
+    this.setAuthHeaders()
+    return Promise.resolve()
   }
 
-  loggingIn({ ["data"]: { userLogin } }) {
+  loggingIn ({ data: { userLogin } }) {
     // console.log(data);
     // console.log(userLogin);
 
     // const { userLogin } = data;
     // localStorage.setItem("user", JSON.stringify(userLogin.user));
-    localStorage.setItem("token", userLogin.token);
+    localStorage.setItem('token', userLogin.token)
     // localStorage.setItem("id", userLogin.user.id);
-    setAuthHeader(userLogin.token);
+    setAuthHeader(userLogin.token)
   }
 }
 
-const authService = new AuthService();
+const authService = new AuthService()
 
-checkToken(authService);
+checkToken(authService)
 
-export default authService;
+export default authService

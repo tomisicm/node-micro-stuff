@@ -39,36 +39,36 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import { LOGIN_QUERY } from "@/graphql/authenticate";
+import { mapActions } from 'vuex'
+import { LOGIN_QUERY } from '@/graphql/authenticate'
 
 export default {
   props: {
     userEmail: {
       type: String,
-      default: ""
+      default: ''
     }
   },
-  data() {
+  data () {
     return {
       form: {
-        email: this.userEmail || "",
-        password: ""
+        email: this.userEmail || '',
+        password: ''
       }
-    };
+    }
   },
   methods: {
-    ...mapActions("authStore", ["login"]),
+    ...mapActions('authStore', ['login']),
 
-    async handleLogin() {
+    async handleLogin () {
       try {
-        await this.login(LOGIN_QUERY);
+        await this.login(LOGIN_QUERY)
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
     }
   },
   computed: {},
-  name: "Login"
-};
+  name: 'Login'
+}
 </script>
