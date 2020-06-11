@@ -9,14 +9,17 @@ export interface ListingAttributes {
 	createdBy?: string;
 	bookIds?: ListingBooks[];
 }
-
+// TODO: whats the benefit of this line?
+export interface ListingModel extends Model<ListingAttributes, ListingAttributes>  {
+	updateAssociatedBooks: () => Listing
+}
 @Table({
 	defaultScope: {},
 	paranoid: true,
 	tableName: 'listings',
 	timestamps: true,
 })
-export class Listing extends Model<ListingAttributes, Listing> implements ListingAttributes {
+export class Listing extends Model<ListingModel, ListingAttributes> implements ListingAttributes {
 	@Column({
 		allowNull: false,
 		autoIncrement: true,
@@ -45,39 +48,40 @@ export class Listing extends Model<ListingAttributes, Listing> implements Listin
 
 	@HasMany(() => ListingBooks, 'listingId')
 	bookIds!: ListingBooks[];
+
+	async updateAssociatedBooks(bookIds: []) {
+		const associatedBookIds = this.getAssociatedBooksIdsArray()
+
+		const listingId = this.id
+		const bookIdsToAdd = _.difference(bookIds, associatedBookIds)
+		const bookIdsToRemove = _.difference(associatedBookIds, bookIds)
+
+		try {
+			await ListingBooks.bulkCreate(
+				bookIdsToAdd.map(bookId => ({
+					listingId,
+					bookId
+				}))
+			)
+			await ListingBooks.destroy({
+				where: {
+					bookId: bookIdsToRemove
+				}
+			})
+
+		} catch (e) {
+			console.log(e)
+			throw e
+		}
+	}
+
+	getAssociatedBooksIdsArray() {
+		if (this.bookIds.length) {
+			return this.bookIds.map(bookListing => {
+				return bookListing.id
+			})
+		} else {
+			return []
+		}
+	}
 }
-
-// 	Listing.prototype.getAssociatedBooksIdsArray = function () {
-// 		if (this.bookIds) {
-// 			return this.bookIds.map(bookListing => {
-// 				return bookListing.dataValues.id
-// 			})
-// 		}
-// 	}
-
-// 	Listing.prototype.updateAssociatedBooks = async function (bookIds) {
-// 		const associatedBookIds = this.getAssociatedBooksIdsArray()
-
-// 		const listingId = this.id
-// 		const bookIdsToAdd = _.difference(bookIds, associatedBookIds)
-// 		const bookIdsToRemove = _.difference(associatedBookIds, bookIds)
-
-// 		try {
-// 			await sequelize.models.ListingBooks.bulkCreate(
-// 				bookIdsToAdd.map(bookId => ({
-// 					listingId,
-// 					bookId
-// 				}))
-// 			)
-// 			await sequelize.models.ListingBooks.destroy({
-// 				where: {
-// 					bookId: bookIdsToRemove
-// 				},
-// 			})
-// 			return this.reload()
-
-// 		} catch (e) {
-// 			console.log(e)
-// 			throw e
-// 		}
-// 	}

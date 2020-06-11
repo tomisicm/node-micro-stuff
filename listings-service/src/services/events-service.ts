@@ -1,14 +1,19 @@
-import amqp, { Message } from 'amqplib'
+import amqp, { Message, Connection, Channel } from 'amqplib'
 import { ListingBooksService } from '#root/services/listing-books-service'
 
 const connectAndListen = async function () {
-	// TODO
-	const connection = await amqp.connect('amqp://admin:password@events-service:5672')
+	try {
+		// TODO
+		const connection: Connection = await amqp.connect('amqp://admin:password@events-service:5672')
+	
+		const channel: Channel = await connection.createChannel()
+		await channel.prefetch(1)
 
-	const channel = await connection.createChannel()
-	await channel.prefetch(1)
-
-	await consume({ connection, channel })
+		// console.log(connection.connection.channels)
+		// await consume({ connection, channel })
+	} catch (e) {
+		console.log(e)
+	}
 }
 
 // TODO

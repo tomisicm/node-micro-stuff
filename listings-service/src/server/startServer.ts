@@ -4,7 +4,7 @@ import express from 'express'
 
 import accessEnv from '#root/helpers/accessEnv'
 
-import { connectAndListen } from './events-service'
+import { connectAndListen } from '#root/services/events-service'
 import setupRoutes from './routes'
 
 const PORT = accessEnv('PORT', 7100)

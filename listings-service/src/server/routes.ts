@@ -7,7 +7,7 @@ const { models } = sequelize
 const setupRoutes = (app: Application):void => {
 	app.get('/listings', async (req: Request, res: Response) => {
 		try {
-			const listings = await Listing.findAll({ 
+			const listings = await Listing.findAll<Listing>({ 
 				include: [
 					{
 						model: models.ListingBooks,
@@ -25,7 +25,7 @@ const setupRoutes = (app: Application):void => {
 
 	app.get('/listings/:id', async (req: Request, res: Response) => {
 		try {
-			const listing = await Listing.findByPk(req.params.id, { 
+			const listing = await Listing.findByPk<Listing>(req.params.id, { 
 				include: [
 					{
 						model: models.ListingBooks,
@@ -43,7 +43,7 @@ const setupRoutes = (app: Application):void => {
 
 	app.post('/listings', async (req: Request, res: Response) => {
 		try {
-			const listing: Listing = await Listing.create(req.body)
+			const listing: Listing = await Listing.create<Listing>(req.body)
 			return res.json(listing)
 		} catch (e) {
 			return res.json(e)
@@ -52,7 +52,7 @@ const setupRoutes = (app: Application):void => {
 
 	app.put('/listings/:id', async (req: Request, res: Response) => {
 		try {
-			const listing = await Listing.findByPk(req.params.id, { 
+			const listing = await Listing.findByPk<Listing>(req.params.id, { 
 				include: [
 					{
 						model: models.ListingBooks,
@@ -69,10 +69,10 @@ const setupRoutes = (app: Application):void => {
 					fields: ['title', 'description']
 				})
 				await listing.updateAssociatedBooks(req.body.bookIds)
-				return res.json(listing)
+				return res.json(listing.reload())
+			} else {
+				return res.json({error: 'listing not found'})
 			}
-
-			return res.json({})
 		} catch (e) {
 			console.log(e)
 			return res.json(e)
