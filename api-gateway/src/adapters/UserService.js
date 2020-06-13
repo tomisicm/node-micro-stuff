@@ -31,12 +31,12 @@ export default class UserService {
 				raw: true
 			});
 			if (!user) {
-				throw new Error("User and password combination does not exist!");
+				throw new Error("email and password combination does not exist!");
 			}
 
 			const match = await comparePassword(password, user.passwordHash);
 			if (!match) {
-				throw new Error("User and password combination does not exist!");
+				throw new Error("email and password combination does not exist!");
 			}
 
 			const token = newToken(user);
