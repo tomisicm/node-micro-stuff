@@ -14,42 +14,42 @@ class AuthService {
   // }
 
   async login(queryData: any) {
-    const query = /* GraphQL */ `query userLogin($userInput: UserInput) {
-      userLogin(userInput: $userInput )
-      {
-        id
-        token
-        expiresIn
-      }
-    }`
+    const query = /* GraphQL */ `query
+      userLogin($userInput: UserInput) {
+        userLogin(userInput: $userInput) {
+          id
+          token
+          expiresIn
+        }
+      }`
 
     const variables = {
       userInput: {
-        email: 'qweqwe@12311.qwe',
-        password: 'asdaasd@'
+        ...queryData
       }
     }
 
     const data = await request(this.endpoint, query, variables)
 
-    console.log(data)
-
     return data
   }
 
   public async register(queryData: any) {
-    const query = /* GraphQL */ `mutation createUser($userInput: { email: $email, password: $passwprd }) 
-    {
-      id
-      token
-      expiresIn
-    }`
+    const query = /* GraphQL */ `mutation
+      createUser($userInput: UserInput) {
+        createUser(userInput: $userInput) {
+          id
+          email
+        }
+      }`
 
-    const variables = queryData
+    const variables = {
+      userInput: {
+        ...queryData
+      }
+    }
 
     const data = await request(this.endpoint, query, variables)
-
-    console.log(data)
 
     return data
   }

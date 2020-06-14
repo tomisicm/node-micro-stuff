@@ -1,28 +1,23 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-// import Home from '@/views/Home.vue'
+import Home from '@/views/Home.vue'
 
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
-  // {
-  //   path: '/',
-  //   name: 'Home',
-  //   component: Home,
-  // },
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue'),
-  // },
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
   {
     path: '/auth',
-    name: 'Auth',
+    name: 'auth',
     component: () => import(/* webpackChunkName: "auth" */ '@/views/AppAuth.vue'),
     children: [
       {
         path: 'login',
-        name: 'Login',
+        name: 'login',
         component: () => import(/* webpackChunkName: "auth" */ '@/components/auth/AppLogin.vue'),
         meta: {
           requiresAuth: false
@@ -30,7 +25,7 @@ const routes: Array<RouteConfig> = [
       },
       {
         path: 'register',
-        name: 'Register',
+        name: 'register',
         component: () => import(/* webpackChunkName: "auth" */ '@/components/auth/AppRegister.vue'),
         meta: {
           requiresAuth: false

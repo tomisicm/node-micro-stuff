@@ -1,10 +1,13 @@
 <template>
-  <form v-on:submit.prevent disalbled="true">
-    <div>Login</div>
-    <input type="text" class="form-control" v-model="email">
-    <input type="text" class="form-control" v-model="password">
-    <button @click="login" type="button" class="btn btn-light">Login</button>
-  </form>
+  <div>
+    <form v-on:submit.prevent>
+      <div>Login</div>
+      <input type="text" class="form-control" v-model="email">
+      <input type="text" class="form-control" v-model="password">
+      <button @click="login" type="button" class="btn btn-light">Login</button>
+    </form>
+    <router-link :to="{ name: 'register' }">Register</router-link>
+  </div>
 </template>
 
 <script lang="ts">
@@ -15,7 +18,6 @@ import AuthService from '@/services/AuthService'
 export default Vue.extend({
   name: 'Login',
   setup() {
-    const loading = ref('')
     const email = ref('')
     const password = ref('')
 
