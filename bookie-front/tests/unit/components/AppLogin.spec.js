@@ -17,7 +17,7 @@ describe('AppLogin.vue', () => {
     })
   })
 
-  it('login', async () => {
+  it('login functionality', async () => {
     expect.assertions(3)
 
     const loginData = { email: 'qqqq', password: 'qqqq' }
@@ -31,5 +31,19 @@ describe('AppLogin.vue', () => {
     expect(AuthServiceLogin.login).toHaveBeenCalled()
     expect(AuthServiceLogin.login.mock.calls.length).toBe(1)
     expect(AuthServiceLogin.login.mock.calls[0][0]).toStrictEqual(loginData)
+  })
+
+  it.skip('form is cleared', async () => {
+    expect.assertions(3)
+
+    const loginData = { email: 'qqqq', password: 'qqqq' }
+
+    wrapper.setData(loginData)
+    const submitButton = wrapper.find('#submit-login')
+    submitButton.trigger('click')
+
+    await flushPromises()
+    
+    // assertions
   })
 })
