@@ -2,9 +2,28 @@
   <div>
     <form v-on:submit.prevent>
       <div>Login</div>
-      <input type="text" class="form-control" v-model="email">
-      <input type="text" class="form-control" v-model="password">
-      <button @click="doSubmit" type="button" class="btn btn-light">Login</button>
+
+      <input
+        v-model="email"
+        type="text"
+        class="form-control"
+        name="email"
+        id="email"
+      />
+
+      <input
+        v-model="password"
+        type="text"
+        class="form-control password"
+        name="password"
+      />
+
+      <button
+        @click="doSubmit"
+        type="button"
+        class="btn btn-light"
+        id="submit-login"
+      >Login</button>
     </form>
     <div>is logged in {{ isLoggedIn }}</div>
     <div>currentUser {{ JSON.stringify(currentUser) }}</div>
@@ -25,6 +44,11 @@ export default Vue.extend({
 
     const validateForm = () => true
 
+    const resetForm = () => {
+      email.value = '',
+      password.value = ''
+    }
+
     const doSubmit = async () => {
       const isReady = validateForm()
 
@@ -33,6 +57,7 @@ export default Vue.extend({
       }
 
       await logIn({ email: email.value, password: password.value })
+      resetForm()
     }
 
     return {
