@@ -1,6 +1,6 @@
 import VueCompositionApi from '@vue/composition-api'
 import { shallowMount, mount } from '@vue/test-utils'
-import AppLogin from '@/components/auth/AppLogin.vue'
+import LoginForm from '@/components/auth/LoginForm.vue'
 import flushPromises from 'flush-promises'
 
 const mockloginData = { id: '1', token: 'token', expiresIn: '1h' }
@@ -9,21 +9,17 @@ jest.mock('@/services/AuthService.ts', () => ({
 }))
 const AuthServiceLogin = require('@/services/AuthService.ts')
 
-
-
-const shallowMountFactory = (props) => {
-  return shallowMount(AppLogin, {
-    propsData: { ...props },
-    stubs: ['router-link']
-  })
-}
+const shallowMountFactory = (props) => shallowMount(LoginForm, {
+  propsData: { ...props },
+  stubs: ['router-link']
+})
 
 const setFormData = (form, formData) => {
   form.find('[name="email"]').setValue(formData.email)
   form.find('[name="password"]').setValue(formData.password)
 }
 
-describe('AppLogin.vue', () => {
+describe('LoginForm.vue', () => {
   let wrapper
 
   beforeEach(() => {
@@ -56,17 +52,17 @@ describe('AppLogin.vue', () => {
     submitButton.trigger('click')
 
     await flushPromises()
-    
-    expect(wrapper.vm._data.email).toBe('')
-    expect(wrapper.vm._data.password).toBe('')
+
+    expect(wrapper.vm.email).toBe('')
+    expect(wrapper.vm.password).toBe('')
   })
 })
 
-describe('AppLogin', () => {
+describe('LoginForm', () => {
   it('computed returns the current user', async () => {
     expect.assertions(2)
 
-    let wrapper = mount(AppLogin, {
+    const wrapper = mount(LoginForm, {
       stubs: ['router-link']
     })
 
@@ -77,7 +73,7 @@ describe('AppLogin', () => {
     submitButton.trigger('click')
 
     await wrapper.vm.$nextTick()
-    
+
     expect(wrapper.vm.isLoggedIn).toEqual(true)
     expect(wrapper.vm.currentUser).toStrictEqual({ id: mockloginData.id, ...loginData })
   })

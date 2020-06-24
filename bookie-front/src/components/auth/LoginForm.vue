@@ -37,6 +37,7 @@ import useUser from '@/hooks/useUser'
 
 export default Vue.extend({
   name: 'Login',
+
   setup() {
     const {
       email, password, isLoggedIn, logIn, currentUser
@@ -45,7 +46,7 @@ export default Vue.extend({
     const validateForm = () => true
 
     const resetForm = () => {
-      email.value = '',
+      email.value = ''
       password.value = ''
     }
 
