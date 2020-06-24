@@ -14,7 +14,6 @@ const currentUser = reactive({
 })
 
 const isLoggedIn = computed(() => {
-  console.log('computed execcuted')
   if (currentUser.id) {
     return true
   }
