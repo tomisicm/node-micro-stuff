@@ -18,7 +18,7 @@ const routes: Array<RouteConfig> = [
       {
         path: 'login',
         name: 'login',
-        component: () => import(/* webpackChunkName: "auth" */ '@/components/auth/LoginForm.vue'),
+        component: () => import(/* webpackChunkName: "auth" */ '@/views/auth/AppLogin.vue'),
         meta: {
           requiresAuth: false
         }
@@ -26,7 +26,7 @@ const routes: Array<RouteConfig> = [
       {
         path: 'register',
         name: 'register',
-        component: () => import(/* webpackChunkName: "auth" */ '@/components/auth/RegisterForm.vue'),
+        component: () => import(/* webpackChunkName: "auth" */ '@/views/auth/AppRegister.vue'),
         meta: {
           requiresAuth: false
         }

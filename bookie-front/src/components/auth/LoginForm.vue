@@ -1,33 +1,33 @@
 <template>
-  <div>
-    <form v-on:submit.prevent>
+  <div class="w-full mx-auto max-w-lg">
+    <form
+      v-on:submit.prevent
+      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+    >
       <div>Login</div>
 
       <input
         v-model="email"
         type="text"
-        class="form-control"
+        class="border p-2 m-2 text-grey-darkest w-full"
         name="email"
         id="email"
       />
 
       <input
         v-model="password"
-        type="text"
-        class="form-control password"
+        type="password"
+        class="border p-2 m-2 text-grey-darkest w-full"
         name="password"
       />
 
       <button
         @click="doSubmit"
         type="button"
-        class="btn btn-light"
+        class="bg-teal-500 p-2 m-2 text-white w-full"
         id="submit-login"
       >Login</button>
     </form>
-    <div>is logged in {{ isLoggedIn }}</div>
-    <div>currentUser {{ JSON.stringify(currentUser) }}</div>
-    <router-link :to="{ name: 'register' }">Register</router-link>
   </div>
 </template>
 

@@ -23,7 +23,7 @@ export default Vue.extend({
     error: {
       type: Object,
       required: false,
-      default: function () {
+      default() {
         return { message: '' }
       }
     }

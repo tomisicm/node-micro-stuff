@@ -7,7 +7,7 @@ Vue.use(VueCompositionApi)
 const email = ref('')
 const password = ref('')
 
-const currentUser = reactive({
+let currentUser = reactive({
   id: '',
   email: '',
   password: ''
@@ -25,13 +25,22 @@ export default function useUser() {
     const { userLogin } = await AuthService.login({ email: email.value, password: password.value })
 
     if (userLogin.id) {
-      currentUser.id = userLogin.id
-      currentUser.email = email.value
-      currentUser.password = password.value
+      currentUser = Object.assign(currentUser, {
+        id: userLogin.id, email: email.value, password: password.value
+      })
     }
+
+    return userLogin
+  }
+
+  async function register(formData: { email: string; password: string }) {
+    const { createUser } = await AuthService.register(
+      { email: email.value, password: password.value }
+    )
+    return createUser
   }
 
   return {
-    email, password, isLoggedIn, currentUser, logIn
+    email, password, isLoggedIn, currentUser, logIn, register
   }
 }
