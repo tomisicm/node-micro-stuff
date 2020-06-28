@@ -33,12 +33,13 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { ref } from '@vue/composition-api'
 import useUser from '@/hooks/useUser'
 
 export default Vue.extend({
   name: 'Login',
 
-  setup() {
+  setup(props, context) {
     const {
       email, password, isLoggedIn, logIn, currentUser
     } = useUser()
@@ -56,9 +57,15 @@ export default Vue.extend({
       if (!isReady) {
         return
       }
-
-      await logIn({ email: email.value, password: password.value })
-      resetForm()
+      try {
+        context.root.$store.commit('showLoader', context.root)
+        await logIn({ email: email.value, password: password.value })
+        resetForm()
+      } catch (e) {
+        console.log(e)
+      } finally {
+        context.root.$store.commit('hideLoader', context.root)
+      }
     }
 
     return {
