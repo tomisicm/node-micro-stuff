@@ -1,23 +1,31 @@
 import VueCompositionApi from '@vue/composition-api'
-import { shallowMount, mount } from '@vue/test-utils'
+import { createLocalVue, shallowMount, mount } from '@vue/test-utils'
 import LoginForm from '@/components/auth/LoginForm.vue'
 import flushPromises from 'flush-promises'
+import Vuex from 'vuex'
 
+const localVue = createLocalVue()
+localVue.use(Vuex)
 const mockloginData = { id: '1', token: 'token', expiresIn: '1h' }
 jest.mock('@/services/AuthService.ts', () => ({
   login: jest.fn().mockResolvedValue({ userLogin: { id: '1', token: 'token', expiresIn: '1h' } })
 }))
 const AuthServiceLogin = require('@/services/AuthService.ts')
 
-const shallowMountFactory = (props) => shallowMount(LoginForm, {
-  propsData: { ...props },
-  stubs: ['router-link']
+const mutations = {
+  showLoader: jest.fn(),
+  hideLoader: jest.fn()
+}
+const store = new Vuex.Store({
+  mutations
 })
 
-const setFormData = (form, formData) => {
-  form.find('[name="email"]').setValue(formData.email)
-  form.find('[name="password"]').setValue(formData.password)
-}
+const shallowMountFactory = (props) => shallowMount(LoginForm, {
+  store: store,
+  localVue: localVue,
+  propsData: { ...props },
+  stubs: ['router-link'],
+})
 
 describe('LoginForm.vue', () => {
   let wrapper
@@ -26,7 +34,7 @@ describe('LoginForm.vue', () => {
     wrapper = shallowMountFactory()
   })
 
-  it('login functionality', async () => {
+  it.only('login functionality', async () => {
     expect.assertions(3)
 
     const loginData = { email: 'qqqq', password: 'qqqq' }
@@ -78,3 +86,10 @@ describe('LoginForm', () => {
     expect(wrapper.vm.currentUser).toStrictEqual({ id: mockloginData.id, ...loginData })
   })
 })
+
+
+// helper functions
+const setFormData = (form, formData) => {
+  form.find('[name="email"]').setValue(formData.email)
+  form.find('[name="password"]').setValue(formData.password)
+}
