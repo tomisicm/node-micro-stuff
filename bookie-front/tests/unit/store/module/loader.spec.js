@@ -20,11 +20,13 @@ describe('loaders', () => {
     store.state.loader.count = 0
   })
 
-  it('show modal once', () => {
+  it('hide modal once', () => {
     store.commit('hideLoader', localVue)
 
     expect(store.state.loader.visible).toBe(false)
     expect(store.state.loader.count).toBe(0)
+    expect(localVue.$loading).toHaveBeenCalled()
+    expect(localVue.$loading.mock.calls[0][0]).toBe(false)
   })
 
   it('show modal once', () => {
@@ -32,12 +34,8 @@ describe('loaders', () => {
 
     expect(store.state.loader.visible).toBe(true)
     expect(store.state.loader.count).toBe(1)
-  })
-
-  it('show modal once', () => {
-    store.commit('hideLoader', localVue)
-    expect(store.state.loader.visible).toBe(false)
-    expect(store.state.loader.count).toBe(0)
+    expect(localVue.$loading).toHaveBeenCalled()
+    expect(localVue.$loading.mock.calls[1][0]).toBe(true)
   })
 
   it('show modal twice', () => {

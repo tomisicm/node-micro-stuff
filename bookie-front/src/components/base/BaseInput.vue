@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="row">
-    <input
-      v-model="value"
-    />
+      <input
+        v-model="value"
+      />
     </div>
     <div class="row">
       {{ error && error.message }}
