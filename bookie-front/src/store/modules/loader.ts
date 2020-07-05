@@ -16,7 +16,7 @@ const mutations = {
 
   hideLoader(state: loader, vm: Vue): void {
     if (state.count > 0) {
-      state.count = state.count - 1
+      state.count -= 1
     }
     if (state.count === 0) {
       state.visible = false

@@ -3,12 +3,20 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
     <template>
-      <router-link v-if="!isLoggedIn" :to="{ name: 'login' }">Login</router-link>
-      <router-link v-else :to="{ name: 'my-account' }">My Account</router-link>
+      <router-link
+        v-if="!isLoggedIn"
+        :to="{ name: 'login' }"
+        class='login'
+      >Login</router-link>
+      <router-link
+        v-else
+        :to="{ name: 'my-account' }"
+        class='my-account'
+      >My Account</router-link>
     </template>
-
   </div>
 </template>
+
 <script lang="ts">
 import Vue from 'vue'
 import useUser from '@/hooks/useUser'

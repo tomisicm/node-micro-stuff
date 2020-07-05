@@ -9,12 +9,11 @@ const localVue = applicationInit(createLocalVue())
 // patching
 localVue.$loading = jest.fn()
 
-jest.doMock("vue", () => ({
+jest.doMock('vue', () => ({
   default: localVue
 }))
 
 describe('loaders', () => {
-
   beforeEach(() => {
     store.state.loader.visible = false
     store.state.loader.count = 0

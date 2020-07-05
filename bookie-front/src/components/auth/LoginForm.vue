@@ -33,7 +33,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { ref } from '@vue/composition-api'
 import useUser from '@/hooks/useUser'
 
 export default Vue.extend({
@@ -41,7 +40,7 @@ export default Vue.extend({
 
   setup(props, context) {
     const {
-      email, password, isLoggedIn, logIn, currentUser
+      email, password, isLoggedIn, logIn
     } = useUser()
 
     const validateForm = () => true
@@ -69,7 +68,7 @@ export default Vue.extend({
     }
 
     return {
-      email, password, isLoggedIn, doSubmit, currentUser
+      email, password, isLoggedIn, doSubmit
     }
   }
 })
