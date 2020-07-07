@@ -1,6 +1,6 @@
 import VueRouter from 'vue-router'
 
-export const createStore = (VueInstamce) => {
+export const createRouter = (VueInstamce) => {
   VueInstamce.use(VueRouter)
 
   const router = new VueRouter({
