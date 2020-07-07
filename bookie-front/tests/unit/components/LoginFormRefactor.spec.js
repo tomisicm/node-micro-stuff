@@ -1,15 +1,8 @@
 import VueCompositionApi from '@vue/composition-api'
-import createLocalTestVue from '../../helpers/createLocalTestVue'
+import flushPromises from 'flush-promises'
 import { shallowMount, mount } from '@vue/test-utils'
 import LoginForm from '@/components/auth/LoginForm.vue'
-import flushPromises from 'flush-promises'
-
-const { localVue, store } = createLocalTestVue({
-  mutations: {
-    showLoader: jest.fn(),
-    hideLoader: jest.fn(),
-  }
-})
+import createLocalTestVue from '../../helpers/createLocalTestVue'
 
 // jest module loader gets this 'hoisted' on top
 jest.mock('@/services/AuthService.ts', () => ({
@@ -20,25 +13,35 @@ const AuthServiceLogin = require('@/services/AuthService.ts')
 
 const mockloginData = { id: '1', token: 'token', expiresIn: '1h' }
 
-const shallowMountFactory = (props) => shallowMount(LoginForm, {
-  // mocks: {
-  //   $store: store
-  // },
-  store: store,
-  localVue,
+const showLoader = jest.fn()
+const hideLoader = jest.fn()
+
+const mutations = {
+  showLoader,
+  hideLoader
+}
+
+const { localVue, store } = createLocalTestVue({
+  mutations
+})
+
+const shallowMountFactory = (props) => mount(LoginForm, {
+  mocks: {
+    $store: store
+  },
   propsData: { ...props },
-  stubs: ['router-link']
+  stubs: ['router-link'],
+  localVue
 })
 
 describe('LoginForm.vue', () => {
   let wrapper
-  
 
   beforeEach(() => {
     wrapper = shallowMountFactory()
   })
 
-  it.only('login functionality', async () => {
+  it('login functionality', async () => {
     expect.assertions(5)
 
     const loginData = { email: 'qqqq', password: 'qqqq' }
@@ -46,7 +49,7 @@ describe('LoginForm.vue', () => {
 
     const submitButton = wrapper.find('#submit-login')
     submitButton.trigger('click')
-    
+
     expect(showLoader).toHaveBeenCalled()
     await flushPromises()
     expect(AuthServiceLogin.login).toHaveBeenCalled()
@@ -71,7 +74,7 @@ describe('LoginForm.vue', () => {
   })
 })
 
-describe.skip('LoginForm', () => {
+describe('LoginForm', () => {
   it('computed returns the current user', async () => {
     expect.assertions(1)
 
@@ -95,7 +98,7 @@ describe.skip('LoginForm', () => {
 })
 
 // helper functions
-const setFormData = (form, formData) => {
+function setFormData(form, formData) {
   form.find('[name="email"]').setValue(formData.email)
   form.find('[name="password"]').setValue(formData.password)
 }

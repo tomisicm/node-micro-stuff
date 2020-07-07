@@ -17,6 +17,8 @@ const store = new Vuex.Store({
 })
 
 export default store
+
+// To be removed
 export const createStore = (store: { state, mutations, actions, modules}) => {
   return new Vuex.Store({
     ...store

@@ -1,7 +1,5 @@
 import { createLocalVue } from '@vue/test-utils'
-import Vuex, { Store } from 'vuex'
-import VueRouter from 'vue-router'
-import { createStore } from '@/store'
+import { createStore } from '../helpers/createStore'
 import { createRouter } from '@/router'
 
 type StoreArgs = { state, mutations, actions, modules}
@@ -9,10 +7,7 @@ type StoreArgs = { state, mutations, actions, modules}
 const createLocalTestVue = (initStore: StoreArgs) => {
   const localVue = createLocalVue()
 
-  localVue.use(VueRouter)
-  localVue.use(Vuex)
-
-  const store = createStore(initStore)
+  const store = createStore(localVue, initStore)
   const router = createRouter()
 
   return { localVue, store, router }
