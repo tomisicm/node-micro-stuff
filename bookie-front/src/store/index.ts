@@ -4,7 +4,7 @@ import loader from './modules/loader'
 
 Vue.use(Vuex)
 
-const store = new Vuex.Store({
+export default new Vuex.Store({
   state: {
   },
   mutations: {
@@ -15,12 +15,3 @@ const store = new Vuex.Store({
     loader
   }
 })
-
-export default store
-
-// To be removed
-export const createStore = (store: { state, mutations, actions, modules}) => {
-  return new Vuex.Store({
-    ...store
-  })
-}

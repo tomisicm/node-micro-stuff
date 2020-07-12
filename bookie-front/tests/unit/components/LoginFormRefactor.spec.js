@@ -16,13 +16,11 @@ const mockloginData = { id: '1', token: 'token', expiresIn: '1h' }
 const showLoader = jest.fn()
 const hideLoader = jest.fn()
 
-const mutations = {
-  showLoader,
-  hideLoader
-}
-
 const { localVue, store } = createLocalTestVue({
-  mutations
+  mutations: {
+    showLoader,
+    hideLoader
+  }
 })
 
 const shallowMountFactory = (props) => mount(LoginForm, {
@@ -39,6 +37,7 @@ describe('LoginForm.vue', () => {
 
   beforeEach(() => {
     wrapper = shallowMountFactory()
+    // console.log(wrapper.vm.$options.components)
   })
 
   it('login functionality', async () => {
@@ -79,7 +78,7 @@ describe('LoginForm', () => {
     expect.assertions(1)
 
     const wrapper = mount(LoginForm, {
-      stubs: ['router-link'],
+      stubs: ['router-link', 'base-input'],
       mocks: {
         $store: store
       }

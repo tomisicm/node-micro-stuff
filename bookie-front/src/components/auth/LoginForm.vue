@@ -6,19 +6,22 @@
     >
       <div>Login</div>
 
-      <input
+      <base-input
         v-model="email"
-        type="text"
-        class="border p-2 m-2 text-grey-darkest w-full"
+        :inputClasses="'border p-2 m-2 text-grey-darkest w-full'"
         name="email"
         id="email"
+        type="text"
+        placeholder="Email"
       />
 
-      <input
+      <base-input
         v-model="password"
-        type="password"
-        class="border p-2 m-2 text-grey-darkest w-full"
+        :inputClasses="'border p-2 m-2 text-grey-darkest w-full'"
         name="password"
+        id="password"
+        type="password"
+        placeholder="Password"
       />
 
       <button

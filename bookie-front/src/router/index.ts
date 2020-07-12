@@ -47,8 +47,3 @@ const router = new VueRouter({
 })
 
 export default router
-
-// To be removed
-export const createRouter = () => {
-  return new VueRouter()
-}
