@@ -24,12 +24,13 @@
         placeholder="Password"
       />
 
-      <button
+      <base-button
+        :buttonClasses="'bg-teal-500 p-2 m-2 text-white w-full'"
         @click="doSubmit"
-        type="button"
-        class="bg-teal-500 p-2 m-2 text-white w-full"
         id="submit-login"
-      >Login</button>
+      >
+        Login
+      </base-button>
     </form>
   </div>
 </template>

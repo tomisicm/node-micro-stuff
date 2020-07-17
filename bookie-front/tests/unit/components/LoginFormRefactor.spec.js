@@ -81,7 +81,8 @@ describe('LoginForm', () => {
       stubs: ['router-link', 'base-input'],
       mocks: {
         $store: store
-      }
+      },
+      localVue
     })
 
     const loginData = { email: mockloginData.email, password: mockloginData.password }

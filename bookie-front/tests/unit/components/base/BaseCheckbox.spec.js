@@ -6,12 +6,12 @@ import flushPromises from 'flush-promises'
 const localVue = createLocalVue()
 
 const shallowMountFactory = () => {
-    return shallowMount(BaseCheckbox, {
-        propsData: {
-          value: true
-        },
-        localVue
-    })
+  return shallowMount(BaseCheckbox, {
+    propsData: {
+      value: true
+    },
+    localVue
+  })
 }
 
 describe('base-checkbox', () => {

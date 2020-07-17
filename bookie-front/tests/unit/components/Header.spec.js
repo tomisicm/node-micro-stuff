@@ -1,30 +1,14 @@
-import Vuex from 'vuex'
 import VueCompositionApi from '@vue/composition-api'
-import { createLocalVue, shallowMount, mount } from '@vue/test-utils'
+import { createLocalVue, shallowMount } from '@vue/test-utils'
 import Header from '@/components/Header.vue'
-import flushPromises from 'flush-promises'
-
-const localVue = createLocalVue()
 
 describe('Header.vue', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = shallowMount(Header, {
-      computed: {
-        isLoggedIn: () => false
-      },
-      localVue,
-      stubs: ['router-link']
-    })
-  })
-
   it('if user is not logged in', () => {
-    wrapper = shallowMount(Header, {
+    let wrapper = shallowMount(Header, {
+      // swap with props Data since its only used for rendering
       computed: {
         isLoggedIn: () => false
       },
-      localVue,
       stubs: ['router-link']
     })
 
@@ -33,11 +17,12 @@ describe('Header.vue', () => {
   })
 
   it('if user is logged in', () => {
-    wrapper = shallowMount(Header, {
+    let wrapper = shallowMount(Header, {
       computed: {
-        isLoggedIn: () => true
+        isLoggedIn (){
+          return true
+        } 
       },
-      localVue,
       stubs: ['router-link']
     })
 
