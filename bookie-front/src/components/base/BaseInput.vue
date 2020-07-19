@@ -1,10 +1,10 @@
 <template>
   <div :class="wrapperClasses">
-    <div class="cf-c-input__ctn">
+    <div class="input__ctn">
       <input
         :tabindex="tabindex"
         :name="name"
-        :class="'cf-c-input__field ' + inputClasses"
+        :class="inputClasses"
         :type="type"
         :placeholder="placeholder"
         :required="required"
@@ -16,17 +16,18 @@
         @blur="$emit('blur', $event.target.value)"
         @focus="$emit('focus', $event.target.value)"
       />
-      <span v-if="requiredAsterisk" class="cf-c-input__required">*</span>
+      <span v-if="requiredAsterisk" class="input__required">*</span>
     </div>
-    <span v-if="!!errorMessage" class="cf-c-input__error">{{
-      errorMessage
-    }}</span>
+    <span v-if="!!errorMessage" class="input__error">
+      {{ errorMessage }}
+    </span>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { INPUT_TYPES } from './constants'
+
 export default Vue.extend({
   name: 'base-input',
   computed: {
@@ -34,59 +35,11 @@ export default Vue.extend({
       let classes = this.wrapperBaseClasses
 
       if (this.errorMessage) {
-        classes += ' cf-has-error'
+        classes += ' has-error'
       }
-
-      // if (this.hasAbsolutePositionError) {
-      //   classes += ' cf-has-absolute-errors'
-      // }
 
       if (this.value) {
-        classes += ' cf-has-text'
-      }
-
-      // if (this.isWithinText) {
-      //   classes += ' cf-c-input--within-text'
-      // }
-
-      // if (this.heightSm) {
-      //   classes += ' cf-c-input--h-sm'
-      // }
-
-      // if (this.heightXs) {
-      //   classes += ' cf-c-input--h-xs'
-      // }
-
-      // if (this.heightAuto) {
-      //   classes += ' cf-c-input--h-auto'
-      // }
-
-      // if (this.widthXs) {
-      //   classes += ' cf-c-input--w-xs'
-      // }
-
-      // if (this.widthSm) {
-      //   classes += ' cf-c-input--w-sm'
-      // }
-
-      // if (this.width60) {
-      //   classes += ' cf-c-input--w-60'
-      // }
-
-      // if (this.fullWidth) {
-      //   classes += ' cf-c-input--full-width'
-      // }
-
-      if (this.noBorders) {
-        classes += ' cf-c-input--no-borders'
-      }
-
-      if (this.borderRadius) {
-        classes += ' cf-c-input--border-radius'
-      }
-
-      if (this.textCenter) {
-        classes += ' cf-c-input--text-center'
+        classes += ' has-text'
       }
 
       return classes
@@ -157,91 +110,19 @@ export default Vue.extend({
       default: 0
     },
 
-    // hasAbsolutePositionError: {
-    //   type: Boolean,
-    //   required: false,
-    //   default: false
-    // },
-
-    // isWithinText: {
-    //   type: Boolean,
-    //   required: false,
-    //   default: false
-    // },
-
-    // heightSm: {
-    //   type: Boolean,
-    //   required: false,
-    //   default: false
-    // },
-
-    // heightXs: {
-    //   type: Boolean,
-    //   required: false,
-    //   default: false
-    // },
-
-    // heightAuto: {
-    //   type: Boolean,
-    //   required: false,
-    //   default: false
-    // },
-
-    // widthXs: {
-    //   type: Boolean,
-    //   required: false,
-    //   default: false
-    // },
-
-    // widthSm: {
-    //   type: Boolean,
-    //   required: false,
-    //   default: false
-    // },
-
-    // width60: {
-    //   type: Boolean,
-    //   required: false,
-    //   default: false
-    // },
-
-    // fullWidth: {
-    //   type: Boolean,
-    //   required: false,
-    //   default: false
-    // },
-
     wrapperBaseClasses: {
       type: String,
       required: false,
       default: ''
     },
-
-    noBorders: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-
+    
     inputClasses: {
       type: String,
       required: false,
       default: ''
     },
 
-    borderRadius: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-
     requiredAsterisk: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-
-    textCenter: {
       type: Boolean,
       required: false,
       default: false
