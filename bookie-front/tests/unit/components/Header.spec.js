@@ -4,7 +4,7 @@ import Header from '@/components/Header.vue'
 
 describe('Header.vue', () => {
   it('if user is not logged in', () => {
-    let wrapper = shallowMount(Header, {
+    const wrapper = shallowMount(Header, {
       // swap with props Data since its only used for rendering
       computed: {
         isLoggedIn: () => false
@@ -17,11 +17,11 @@ describe('Header.vue', () => {
   })
 
   it('if user is logged in', () => {
-    let wrapper = shallowMount(Header, {
+    const wrapper = shallowMount(Header, {
       computed: {
-        isLoggedIn (){
+        isLoggedIn() {
           return true
-        } 
+        }
       },
       stubs: ['router-link']
     })

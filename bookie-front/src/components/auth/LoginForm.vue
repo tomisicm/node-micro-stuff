@@ -7,22 +7,34 @@
       <div>Login</div>
 
       <base-input
-        v-model="email"
+        v-model="userEmail"
         :inputClasses="'border p-2 m-2 text-grey-darkest w-full'"
         name="email"
         id="email"
         type="text"
         placeholder="Email"
-      />
+      >
+        <baseErrorList
+          :errors="v$LoginForm.userEmail.$errors"
+          :showAll="true"
+          slot="error-list"
+        />
+      </base-input>
 
       <base-input
-        v-model="password"
+        v-model="userPassword"
         :inputClasses="'border p-2 m-2 text-grey-darkest w-full'"
         name="password"
         id="password"
         type="password"
         placeholder="Password"
-      />
+      >
+        <baseErrorList
+          :errors="v$LoginForm.userPassword.$errors"
+          :showAll="true"
+          slot="error-list"
+        />
+      </base-input>
 
       <base-button
         :buttonClasses="'bg-teal-500 p-2 m-2 text-white w-full'"
@@ -44,14 +56,14 @@ export default Vue.extend({
 
   setup(props, context) {
     const {
-      email, password, isLoggedIn, logIn
+      userEmail, userPassword, v$LoginForm, isLoggedIn, logIn
     } = useUser()
 
     const validateForm = () => true
 
     const resetForm = () => {
-      email.value = ''
-      password.value = ''
+      userEmail.value = ''
+      userPassword.value = ''
     }
 
     const doSubmit = async () => {
@@ -62,7 +74,7 @@ export default Vue.extend({
       }
       try {
         context.root.$store.commit('showLoader', context.root)
-        await logIn({ email: email.value, password: password.value })
+        await logIn({ email: userEmail.value, password: userPassword.value })
         resetForm()
       } catch (e) {
         console.log(e)
@@ -72,7 +84,7 @@ export default Vue.extend({
     }
 
     return {
-      email, password, isLoggedIn, doSubmit
+      userEmail, userPassword, v$LoginForm, isLoggedIn, doSubmit
     }
   }
 })

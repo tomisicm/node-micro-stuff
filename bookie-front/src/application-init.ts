@@ -2,6 +2,7 @@
 
 import VueLoading from 'vuejs-loading-plugin'
 import VueCompositionApi from '@vue/composition-api'
+import { VuelidatePlugin } from '@vuelidate/core'
 
 import App from './App.vue'
 import router from './router'
@@ -11,6 +12,7 @@ function applicationInit(VueInstance) {
   VueInstance.config.productionTip = false
 
   VueInstance.use(VueCompositionApi)
+  VueInstance.use(VuelidatePlugin)
   VueInstance.use(VueLoading, { text: 'Loading...' })
 
   return VueInstance

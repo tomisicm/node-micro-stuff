@@ -2,13 +2,11 @@ import VueCompositionApi from '@vue/composition-api'
 import { shallowMount } from '@vue/test-utils'
 import BaseButton from '@/components/base/BaseButton.vue'
 
-const shallowMountFactory = () => {
-  return shallowMount(BaseButton, {
-    propsData: {
-      value: true
-    },
-  })
-}
+const shallowMountFactory = () => shallowMount(BaseButton, {
+  propsData: {
+    value: true
+  }
+})
 
 describe('base-button.vue', () => {
   let wrapper

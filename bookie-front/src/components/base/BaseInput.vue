@@ -18,9 +18,9 @@
       />
       <span v-if="requiredAsterisk" class="input__required">*</span>
     </div>
-    <span v-if="!!errorMessage" class="input__error">
-      {{ errorMessage }}
-    </span>
+    <div v-if="$slots['error-list']" class="input__error_ctn">
+      <slot name="error-list" />
+    </div>
   </div>
 </template>
 
@@ -115,7 +115,7 @@ export default Vue.extend({
       required: false,
       default: ''
     },
-    
+
     inputClasses: {
       type: String,
       required: false,
