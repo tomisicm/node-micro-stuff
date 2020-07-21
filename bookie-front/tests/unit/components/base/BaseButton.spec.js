@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import VueCompositionApi from '@vue/composition-api'
 import { shallowMount } from '@vue/test-utils'
 import BaseButton from '@/components/base/BaseButton.vue'

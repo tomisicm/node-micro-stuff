@@ -1,6 +1,6 @@
 import VueRouter from 'vue-router'
 
-export const createRouter = (VueInstamce) => {
+const createRouter = (VueInstamce) => {
   VueInstamce.use(VueRouter)
 
   const router = new VueRouter({
@@ -11,3 +11,5 @@ export const createRouter = (VueInstamce) => {
 
   return router
 }
+
+export default createRouter

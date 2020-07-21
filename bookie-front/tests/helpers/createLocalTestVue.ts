@@ -1,10 +1,10 @@
 import { createLocalVue } from '@vue/test-utils'
-import { createStore } from './createStore'
-import { createRouter } from './createRouter'
+import createStore from './createStore'
+import createRouter from './createRouter'
 import registerGlobalComponents from './registerGlobalComponents'
 
-// register hook for the test env
-require('babel-plugin-require-context-hook/register')()
+// eslint-disable-next-line
+require('babel-plugin-require-context-hook/register')() // register hook for the test env
 
 type StoreArgs = { state; mutations; actions; modules}
 

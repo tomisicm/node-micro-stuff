@@ -1,5 +1,6 @@
+// eslint-disable-next-line
 import VueCompositionApi from '@vue/composition-api'
-import { createLocalVue, shallowMount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import Header from '@/components/Header.vue'
 
 describe('Header.vue', () => {

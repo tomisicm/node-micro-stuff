@@ -1,6 +1,7 @@
+// eslint-disable-next-line
 import VueCompositionApi from '@vue/composition-api'
 import flushPromises from 'flush-promises'
-import { shallowMount, mount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import LoginForm from '@/components/auth/LoginForm.vue'
 import createLocalTestVue from '../../helpers/createLocalTestVue'
 

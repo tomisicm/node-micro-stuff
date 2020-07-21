@@ -4,6 +4,7 @@
  * @see https://github.com/vuejs/vue-test-utils/issues/331
 */
 
+/* eslint-disable */
 export default function setComputed(wrapper, computed) {
   if (!wrapper.isVueInstance()) {
     throw new Error('setComputed() can only be called on a Vue instance')

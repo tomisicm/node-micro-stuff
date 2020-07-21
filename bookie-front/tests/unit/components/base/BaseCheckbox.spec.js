@@ -1,7 +1,7 @@
+// eslint-disable-next-line
 import VueCompositionApi from '@vue/composition-api'
-import { createLocalVue, shallowMount, mount } from '@vue/test-utils'
+import { createLocalVue, shallowMount } from '@vue/test-utils'
 import BaseCheckbox from '@/components/base/BaseCheckbox.vue'
-import flushPromises from 'flush-promises'
 
 const localVue = createLocalVue()
 
