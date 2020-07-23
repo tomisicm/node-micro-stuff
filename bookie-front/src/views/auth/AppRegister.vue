@@ -10,7 +10,7 @@ import Vue from 'vue'
 import RegisterForm from '@/components/auth/RegisterForm.vue'
 
 export default Vue.extend({
-  name: 'AppLogin',
+  name: 'AppRegister',
   components: {
     RegisterForm
   }

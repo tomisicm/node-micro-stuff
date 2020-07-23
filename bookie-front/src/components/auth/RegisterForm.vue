@@ -6,34 +6,58 @@
     >
       <div>Register</div>
 
-      <input
-        v-model="email"
-        type="text"
-        class="border p-2 m-2 text-grey-darkest w-full"
+      <base-input
+        v-model="userEmail"
+        :inputClasses="'border p-2 m-2 text-grey-darkest w-full'"
         name="email"
         id="email"
+        type="text"
+        placeholder="Email"
       >
+        <baseErrorList
+          :errors="v$RegisterForm.userEmail.$errors"
+          :showAll="true"
+          slot="error-list"
+        />
+      </base-input>
 
-      <input
-        v-model="password"
+      <base-input
+        v-model="userPassword"
+        :inputClasses="'border p-2 m-2 text-grey-darkest w-full'"
+        name="password"
+        id="password"
         type="password"
-        class="border p-2 m-2 text-grey-darkest w-full"
+        placeholder="Password"
       >
+        <baseErrorList
+          :errors="v$RegisterForm.userPassword.$errors"
+          :showAll="true"
+          slot="error-list"
+        />
+      </base-input>
 
-      <!-- <input
-        v-model="repeatPassword"
+      <base-input
+        v-model="userRepeatPassword"
+        :inputClasses="'border p-2 m-2 text-grey-darkest w-full'"
+        name="repeatPassword"
+        id="repeatPassword"
         type="password"
-        class="border p-2 m-2 text-grey-darkest w-full"
-      > -->
+        placeholder="Repeat Password"
+      >
+        <baseErrorList
+          :errors="v$RegisterForm.userRepeatPassword.$errors"
+          :showAll="true"
+          slot="error-list"
+        />
+      </base-input>
 
-      <button
-        type="button"
-        class="bg-teal-500 p-2 m-2 text-white w-full"
-        :disabled="loading"
+      <base-button
+        :buttonClasses="'bg-teal-500 p-2 m-2 text-white w-full'"
         @click="handleRegistration"
+        id="submit-register"
       >
         Register
-      </button>
+      </base-button>
     </form>
   </div>
 </template>
@@ -42,15 +66,18 @@
 import Vue from 'vue'
 import { ref } from '@vue/composition-api'
 import useUser from '@/hooks/useUser'
+import useUserRegister from '@/hooks/useUserRegister'
 
 export default Vue.extend({
   name: 'Register',
 
   setup(props, context) {
     const {
-      email, password, logIn, register
-    } = useUser()
+      userEmail, userPassword, userRepeatPassword, register, v$RegisterForm
+    } = useUserRegister()
+    const { logIn } = useUser()
     const loading = ref(false)
+
     function toggleLoadingState() {
       loading.value = !loading.value
     }
@@ -58,8 +85,10 @@ export default Vue.extend({
     async function handleRegistration() {
       try {
         toggleLoadingState()
-        const regData = await register({ email: email.value, password: password.value })
-        const logData = await logIn({ email: email.value, password: password.value })
+        const regData = await register({ email: userEmail.value, password: userPassword.value })
+        console.log(regData)
+        const logData = await logIn({ email: userEmail.value, password: userPassword.value })
+        console.log(logData)
         context.root.$router.push({ name: 'home' })
       } catch (e) {
         console.log(e)
@@ -69,7 +98,13 @@ export default Vue.extend({
     }
 
     return {
-      loading, email, password, handleRegistration
+      loading,
+      userEmail,
+      userPassword,
+      userRepeatPassword,
+      handleRegistration,
+      v$RegisterForm,
+      register
     }
   }
 })
