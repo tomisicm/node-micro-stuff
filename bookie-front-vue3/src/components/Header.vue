@@ -1,7 +1,7 @@
 <template>
   <div>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
+    <router-link :to="{ name: 'home' }">Home</router-link> |
+    <router-link :to="{ name: 'books' }">Books</router-link> |
     <span><!-- TODO -->
       <router-link
         v-if="!isLoggedIn"

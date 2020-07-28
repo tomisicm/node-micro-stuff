@@ -5,7 +5,7 @@ import Home from '@/views/Home.vue'
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Home
   },
   {
@@ -32,9 +32,17 @@ const routes = [
       {
         path: 'my-account',
         name: 'my-account',
-        component: () => import(/* webpackChunkName: "auth" */ '@/views/MyAccount.vue')
-      }
+        component: () => import(/* webpackChunkName: "auth" */ '@/views/MyAccount.vue'),
+        meta: {
+          requiresAuth: true
+        }
+      },
     ]
+  },
+  {
+    path: '/books',
+    name: 'books',
+    component: () => import(/* webpackChunkName: "books" */ '@/views/Books.vue'),
   }
 ]
 
