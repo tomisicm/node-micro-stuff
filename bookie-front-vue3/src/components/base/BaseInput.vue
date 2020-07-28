@@ -92,6 +92,7 @@ export default {
       default: false
     },
 
+    // https://github.com/vuejs/docs-next/pull/304
     modelValue: {
       type: [String, Number],
       required: false,

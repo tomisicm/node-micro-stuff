@@ -1052,9 +1052,9 @@
   integrity sha512-ewFXqrQHlFsgc09MK5jP5iR7vumV/BYayNC6PgJO2LPe8vrnNFyjQjSppfEngITi0qvfKtzFvgKymGheFM9UOA==
 
 "@types/serve-static@*":
-  version "1.13.4"
-  resolved "https://registry.yarnpkg.com/@types/serve-static/-/serve-static-1.13.4.tgz#6662a93583e5a6cabca1b23592eb91e12fa80e7c"
-  integrity sha512-jTDt0o/YbpNwZbQmE/+2e+lfjJEJJR0I3OFaKQKPWkASkCoW3i6fsUnqudSMcNAfbtmADGu8f4MV4q+GqULmug==
+  version "1.13.5"
+  resolved "https://registry.yarnpkg.com/@types/serve-static/-/serve-static-1.13.5.tgz#3d25d941a18415d3ab092def846e135a08bbcf53"
+  integrity sha512-6M64P58N+OXjU432WoLLBQxbA0LRGBCRm7aAGQJ+SMC1IMl0dgRVi9EFfoDcS2a7Xogygk/eGN94CfwU9UF7UQ==
   dependencies:
     "@types/express-serve-static-core" "*"
     "@types/mime" "*"
@@ -1088,9 +1088,9 @@
     "@types/webpack" "*"
 
 "@types/webpack-sources@*":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@types/webpack-sources/-/webpack-sources-1.4.1.tgz#3bed49013ec7935680d781e83cf4b5ce13ddf917"
-  integrity sha512-B/RJcbpMp1/od7KADJlW/jeXTEau6NYmhWo+hB29cEfRriYK9SRlH8sY4hI9Au7nrP95Z5MumGvIEiEBHMxoWA==
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@types/webpack-sources/-/webpack-sources-1.4.2.tgz#5d3d4dea04008a779a90135ff96fb5c0c9e6292c"
+  integrity sha512-77T++JyKow4BQB/m9O96n9d/UUHWLQHlcqXb9Vsf4F1+wKNrrlWNFPDLKNT92RJnCSL6CieTc+NDXtCVZswdTw==
   dependencies:
     "@types/node" "*"
     "@types/source-list-map" "*"
@@ -1648,9 +1648,9 @@ ajv-errors@^1.0.0:
   integrity sha512-DCRfO/4nQ+89p/RK43i8Ezd41EqdGIU4ld7nGF8OQ14oc/we5rEntLCUa7+jrn3nn83BosfwZA0wb4pon2o8iQ==
 
 ajv-keywords@^3.1.0, ajv-keywords@^3.4.1:
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-3.5.1.tgz#b83ca89c5d42d69031f424cad49aada0236c6957"
-  integrity sha512-KWcq3xN8fDjSB+IMoh2VaXVhRI0BBGxoYp3rx7Pkb6z0cFjYR9Q9l4yZqqals0/zsioCmocC5H6UvsGD4MoIBA==
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-3.5.2.tgz#31f29da5ab6e00d1c2d329acf7b5929614d5014d"
+  integrity sha512-5p6WTN0DdTGVQk6VjcEju19IgaHudalcfabD7yhDGeA6bcQnmL+CpveLJq/3hvfwd1aof6L386Ougkx6RfyMIQ==
 
 ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.2, ajv@^6.5.5:
   version "6.12.3"
@@ -2329,9 +2329,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001093, caniuse-lite@^1.0.30001097:
-  version "1.0.30001106"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001106.tgz#7e2132711295ef30ffe5ee45b71936354d105d8c"
-  integrity sha512-XqSQKt9Fd3Z9BoN0cpSaITcTInKhMNGkaWtQ4rDnyQU1BJzzWDWCUi3cJflaPWk2kbrkYkfMrMrjIFzb3kd6NQ==
+  version "1.0.30001107"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001107.tgz#809360df7a5b3458f627aa46b0f6ed6d5239da9a"
+  integrity sha512-86rCH+G8onCmdN4VZzJet5uPELII59cUzDphko3thQFgAQG1RNa+sVLDoALIhRYmflo5iSIzWY3vu1XTWtNMQQ==
 
 case-sensitive-paths-webpack-plugin@^2.3.0:
   version "2.3.0"
@@ -3364,9 +3364,9 @@ ejs@^2.6.1:
   integrity sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==
 
 electron-to-chromium@^1.3.488:
-  version "1.3.509"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.509.tgz#830fcb89cd66dc2984d18d794973b99e3f00584c"
-  integrity sha512-cN4lkjNRuTG8rtAqTOVgwpecEC2kbKA04PG6YijcKGHK/kD0xLjiqExcAOmLUwtXZRF8cBeam2I0VZcih919Ug==
+  version "1.3.510"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.510.tgz#dee781ff8b595c0deb60172b75d50b6889757eda"
+  integrity sha512-sLtGB0znXdmo6lM8hy5wTVo+fLqvIuO8hEpgc0DvPmFZqvBu/WB7AarEwhxVKjf3rVbws/rC8Xf+AlsOb36lJQ==
 
 elliptic@^6.0.0, elliptic@^6.5.2:
   version "6.5.3"
@@ -4375,9 +4375,9 @@ hex-color-regex@^1.1.0:
   integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
 
 highlight.js@^9.6.0:
-  version "9.18.1"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.18.1.tgz#ed21aa001fe6252bb10a3d76d47573c6539fe13c"
-  integrity sha512-OrVKYz70LHsnCgmbXctv/bfuvntIKDz177h0Co37DQ5jamGZLVmoCVMtjMtNZY3X9DrCcKfklHPNeA0uPZhSJg==
+  version "9.18.2"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.18.2.tgz#c48dd55f95986e4449228849d709504bfe7cb964"
+  integrity sha512-tglpEIoxZR+CTZw7ivuOZJ2wEowySSPAmBv+BQnXzezJ937wQwWnqJ8BmpQAdi3Lgf3ltlCkhT2bb6IWVZrO9Q==
 
 hmac-drbg@^1.0.0:
   version "1.0.1"
@@ -7909,9 +7909,9 @@ table@^5.2.3:
     string-width "^3.0.0"
 
 tailwindcss@^1.4.6:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-1.5.2.tgz#3e99526e55c600b9df9152b0db12449ed9770855"
-  integrity sha512-OR7wxFetvHruLkQABeQac7jFdTOs+MwXzsuccOuMItva9GBANPd2VX8NgJ3pdvuGSL23c5cVId9jsvuKgulBiQ==
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-1.6.0.tgz#cdad8cdd225129ad41bff6aa607aa39ad6524593"
+  integrity sha512-UZEex5ebsQlCTIBjI0oZITL67HBjOrzMgA4ceLOf8mrBGquLSn7LsO92do1nBSBZBV2Qqpivz9QUwT3zMSQkMA==
   dependencies:
     "@fullhuman/postcss-purgecss" "^2.1.2"
     autoprefixer "^9.4.5"
