@@ -17,7 +17,7 @@
   </div>
 </template>
 
-<script>
+<script  lang="ts">
 import useUser from '@/hooks/useUser'
 
 export default {

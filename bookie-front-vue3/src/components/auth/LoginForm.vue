@@ -48,7 +48,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import useUser from '@/hooks/useUser'
 import Store from '@/store'
 // import { getCurrentInstance } from 'vue'

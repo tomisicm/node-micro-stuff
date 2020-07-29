@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script>
+<script  lang="ts">
 import RegisterForm from '@/components/auth/RegisterForm.vue'
 
 export default {

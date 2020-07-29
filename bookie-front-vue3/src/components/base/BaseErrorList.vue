@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<script>
+<script  lang="ts">
 // https://github.com/vuejs/vue/pull/6856
 // https://stackoverflow.com/questions/54391162/typescript-wont-recognize-prop-values-on-vue-component
 // interface Error {

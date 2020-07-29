@@ -24,7 +24,7 @@
   </div>
 </template>
 
-<script>
+<script  lang="ts">
 import { INPUT_TYPES } from './constants'
 
 export default {

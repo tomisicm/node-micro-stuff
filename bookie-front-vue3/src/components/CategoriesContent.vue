@@ -1,7 +1,7 @@
 <template>
   <div>Selected Books</div>
 </template>
-<script>
+<script  lang="ts">
 export default {
   name: 'selected books'
 }

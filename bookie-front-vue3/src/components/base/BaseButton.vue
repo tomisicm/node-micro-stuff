@@ -12,7 +12,7 @@
   </button>
 </template>
 
-<script>
+<script  lang="ts">
 import { BUTTON_TYPES, BUTTON_VARIATIONS } from './constants'
 
 export default {

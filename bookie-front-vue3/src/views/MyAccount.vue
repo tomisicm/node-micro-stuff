@@ -5,8 +5,8 @@
   </div>
 </template>
 
-<script>
-import useUser from '@/hooks/useUser.js'
+<script  lang="ts">
+import useUser from '@/hooks/useUser.ts'
 
 export default {
   name: 'MyAccount',

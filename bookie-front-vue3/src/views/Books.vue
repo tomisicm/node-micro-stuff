@@ -14,7 +14,7 @@
   </div>
 </template>
 
-<script>
+<script  lang="ts">
 import CategoriesFilter from '@/components/CategoriesFilter'
 import CategoriesContent from '@/components/CategoriesContent'
 import { mapGetters } from 'vuex'

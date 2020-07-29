@@ -62,7 +62,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { ref } from 'vue'
 import useUser from '@/hooks/useUser'
 import useUserRegister from '@/hooks/useUserRegister'
