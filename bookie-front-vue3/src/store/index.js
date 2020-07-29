@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import loader from './modules/loader'
+import category from './modules/category'
 
 export default createStore({
   state: {
@@ -9,6 +10,7 @@ export default createStore({
   actions: {
   },
   modules: {
-    loader
+    loader,
+    category
   }
 })
