@@ -15,11 +15,12 @@
 </template>
 
 <script  lang="ts">
-import CategoriesFilter from '@/components/CategoriesFilter'
-import CategoriesContent from '@/components/CategoriesContent'
+import { defineComponent } from 'vue'
+import CategoriesFilter from '@/components/CategoriesFilter.vue'
+import CategoriesContent from '@/components/CategoriesContent.vue'
 import { mapGetters } from 'vuex'
 
-export default {
+export default defineComponent({
   name: 'BooksPage',
   components: {
     CategoriesFilter, CategoriesContent
@@ -36,5 +37,5 @@ export default {
       'allCategories', 'selectedCategories'
     ]),
   }
-}
+})
 </script>

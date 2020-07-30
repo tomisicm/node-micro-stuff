@@ -18,9 +18,10 @@
 </template>
 
 <script  lang="ts">
+import { defineComponent } from 'vue'
 import useUser from '@/hooks/useUser'
 
-export default {
+export default defineComponent({
   name: 'Header',
   setup() {
     const {
@@ -29,7 +30,7 @@ export default {
 
     return { isLoggedIn }
   }
-}
+})
 </script>
 
 <style lang="less" scoped>

@@ -8,12 +8,13 @@
 </template>
 
 <script  lang="ts">
+import { defineComponent } from 'vue'
 import LoginForm from '@/components/auth/LoginForm.vue'
 
-export default {
+export default defineComponent({
   name: 'AppLogin',
   components: {
     LoginForm
   }
-}
+})
 </script>

@@ -7,13 +7,14 @@
 </template>
 
 <script  lang="ts">
+import { defineComponent } from 'vue'
 // https://github.com/vuejs/vue/pull/6856
 // https://stackoverflow.com/questions/54391162/typescript-wont-recognize-prop-values-on-vue-component
 // interface Error {
 //   $message: string;
 // }
 
-export default {
+export default defineComponent({
   props: {
     errors: {
       type: Array,
@@ -43,5 +44,5 @@ export default {
       return this.errors[0].$message
     }
   }
-}
+})
 </script>
