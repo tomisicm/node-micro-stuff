@@ -6,9 +6,10 @@
 </template>
 
 <script  lang="ts">
+import { defineComponent } from 'vue'
 import useUser from '@/hooks/useUser.ts'
 
-export default {
+export default defineComponent({
   name: 'MyAccount',
   setup() {
     const {
@@ -17,5 +18,5 @@ export default {
 
     return { currentUser }
   }
-}
+})
 </script>

@@ -13,9 +13,10 @@
 </template>
 
 <script  lang="ts">
+import { defineComponent } from 'vue'
 import { BUTTON_TYPES, BUTTON_VARIATIONS } from './constants'
 
-export default {
+export default defineComponent({
   props: {
     disabled: {
       type: Boolean,
@@ -63,5 +64,5 @@ export default {
       `
     }
   }
-}
+})
 </script>

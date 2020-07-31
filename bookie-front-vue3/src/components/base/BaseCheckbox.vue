@@ -20,8 +20,9 @@
 </template>
 
 <script  lang="ts">
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   props: {
     disabled: {
       type: Boolean,
@@ -58,5 +59,5 @@ export default {
       default: ''
     }
   }
-}
+})
 </script>

@@ -49,13 +49,12 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue'
 import useUser from '@/hooks/useUser'
 import Store from '@/store'
 // import { getCurrentInstance } from 'vue'
 
-export default {
-  name: 'Login',
-
+export default defineComponent({  name: 'Login',
   setup(props, context) {
     const {
       userEmail, userPassword, isLoggedIn, logIn // v$LoginForm
@@ -97,5 +96,5 @@ export default {
       userEmail, userPassword, isLoggedIn, doSubmit // v$LoginForm,
     }
   }
-}
+})
 </script>

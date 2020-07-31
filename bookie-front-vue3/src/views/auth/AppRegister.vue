@@ -6,12 +6,13 @@
 </template>
 
 <script  lang="ts">
+import { defineComponent } from 'vue'
 import RegisterForm from '@/components/auth/RegisterForm.vue'
 
-export default {
+export default defineComponent({
   name: 'AppRegister',
   components: {
     RegisterForm
   }
-}
+})
 </script>

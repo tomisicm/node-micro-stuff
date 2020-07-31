@@ -63,11 +63,12 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue'
 import { ref } from 'vue'
 import useUser from '@/hooks/useUser'
 import useUserRegister from '@/hooks/useUserRegister'
 
-export default {
+export default defineComponent({
   name: 'Register',
 
   setup(props, context) {
@@ -106,5 +107,5 @@ export default {
       register
     }
   }
-}
+})
 </script>

@@ -7,8 +7,10 @@
   </div>
 </template>
 
-<script  lang="ts">
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   name: 'CategoriesFilter',
 
   props: {
@@ -19,5 +21,5 @@ export default {
     }
   }
   
-}
+})
 </script>
