@@ -1,5 +1,6 @@
 import AuthService from '@/services/AuthService'
 import { ref } from 'vue'
+import { RegisterForm } from '@/types/auth-types'
 // import useVuelidate from '@vuelidate/core'
 // import {
 //   required, minLength, email, sameAs
@@ -32,7 +33,7 @@ function useUserRegister() {
   //   { userEmail, userPassword, userRepeatPassword }
   // )
 
-  async function register(formData) {
+  async function register(formData: RegisterForm) {
     try {
       const { createUser } = await AuthService.register(
         { email: formData.email, password: formData.password }

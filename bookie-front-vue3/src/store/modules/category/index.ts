@@ -1,12 +1,7 @@
 import mutations from './mutations'
 import actions from './actions'
 import getters from './getters'
-
-// ???
-type State = {
-  allCategories: Array<string>,
-  selectedCategories: Array<string>
-}
+import State from './state'
 
 const state = (): State => ({
   allCategories: [

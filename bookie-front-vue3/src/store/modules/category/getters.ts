@@ -1,8 +1,10 @@
+import State from './state'
+
 const getters = {
-  allCategories (state) {
+  allCategories (state: State) {
     return state.allCategories 
   },
-  selectedCategories (state) {
+  selectedCategories (state: State) {
     return state.selectedCategories.length ? state.selectedCategories : []
   }
 }
