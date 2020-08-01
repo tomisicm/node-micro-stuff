@@ -1,12 +1,3 @@
-<template>
-  <div>
-    filter qqyy
-    <div v-for="category in allCategories" :key="category">
-      {{ category }}
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 
@@ -23,3 +14,12 @@ export default defineComponent({
   
 })
 </script>
+
+<template>
+  <div>
+    <div>Categories</div>
+    <ul v-for="category in allCategories" :key="category">
+      <li>{{ category.name }}</li>
+    </ul>
+  </div>
+</template>

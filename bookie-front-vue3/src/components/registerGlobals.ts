@@ -1,7 +1,6 @@
-// import { upperFirst, camelCase } from 'lodash-es'
-
 const requireComponent = require.context('./base', false, /Base[\w-]+\.vue$/)
 
+// @ts-ignore
 function registerGlobals(VueInstance) {
   requireComponent.keys().forEach((fileName) => {
     // Get the component config

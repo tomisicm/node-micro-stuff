@@ -1,10 +1,10 @@
-import State from './state'
+import { State, Category } from './state'
 
 const getters = {
-  allCategories (state: State) {
+  allCategories (state: State): Array<Category> {
     return state.allCategories 
   },
-  selectedCategories (state: State) {
+  selectedCategories (state: State): Array<Category> {
     return state.selectedCategories.length ? state.selectedCategories : []
   }
 }
