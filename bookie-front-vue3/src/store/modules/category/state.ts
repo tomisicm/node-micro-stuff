@@ -1,22 +1,19 @@
+import { Category } from '@/types/category'
+
 export interface State {
   allCategories: Array<Category>,
   selectedCategories: Array<Category>
 }
 
-export interface Category {
-  id?: String,
-  name: String,
-}
-
 const state = (): State => ({
   allCategories: [
-    { name: 'Science Fiction & Fantasy' },
-    { name: 'Romance' }, 
-    { name: 'Humor & Entertainment' }, 
-    { name: 'Literature & Fiction' },
-    { name: 'Engineering & Transportation' },
-    { name: 'Cookbooks, Food & Wine' },
-    { name: 'Crafts, Hobbies & Home' }
+    { id: '1', name: 'Science Fiction & Fantasy' },
+    { id: '2', name: 'Romance' }, 
+    { id: '3', name: 'Humor & Entertainment' }, 
+    { id: '4', name: 'Literature & Fiction' },
+    { id: '5', name: 'Engineering & Transportation' },
+    { id: '6', name: 'Cookbooks, Food & Wine' },
+    { id: '7', name: 'Crafts, Hobbies & Home' }
   ],
   selectedCategories: []
 })
