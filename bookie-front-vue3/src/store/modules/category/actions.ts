@@ -13,6 +13,11 @@ const actions: ActionTree<State, State> & Actions = {
     const allCategories = await CategoryService.fetchAllCategories()
 
     commit(MutationTypes.SET_ALL_CATEGORIES, allCategories)
+  },
+
+  [ActionTypes.UPDATE_SELECTED_CATEGORIES] (store, payload) {
+    console.log(store)
+    console.log(payload)
   }
 }
 
