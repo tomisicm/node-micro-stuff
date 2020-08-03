@@ -4,6 +4,11 @@ import { ref, reactive, computed } from 'vue'
 // import useVuelidate from '@vuelidate/core'
 // import { required, minLength, email } from '@vuelidate/validators'
 
+type FormData = { 
+  email: string | undefined,
+  password: string | undefined
+}
+
 const userEmail = ref('')
 const userPassword = ref('')
 
@@ -21,7 +26,7 @@ const isLoggedIn = computed(() => {
 })
 
 function useUser() {
-  async function logIn(formData) {
+  async function logIn(formData: FormData) {
     try {
       const { userLogin } = await AuthService.login(
         { email: formData.email, password: formData.password }

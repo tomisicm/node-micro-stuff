@@ -1,7 +1,7 @@
 // import http from '@/services/httpService'
 // import checkAndSetToken from '@/services/checkToken'
 // import { AxiosInstance } from 'axios'
-
+import { LoginForm, RegisterForm } from '@/types/auth-types'
 import { request } from 'graphql-request'
 
 class AuthService {
@@ -13,7 +13,7 @@ class AuthService {
   // checkAndSetToken()
   // }
 
-  async login(queryData) {
+  async login(queryData: LoginForm) {
     const query = /* GraphQL */ `query
       userLogin($userInput: UserInput) {
         userLogin(userInput: $userInput) {
@@ -34,7 +34,7 @@ class AuthService {
     return data
   }
 
-  async register(queryData) {
+  async register(queryData: RegisterForm) {
     const query = /* GraphQL */ `mutation
       createUser($userInput: UserInput) {
         createUser(userInput: $userInput) {

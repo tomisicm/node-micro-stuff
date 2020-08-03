@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 import loader from './modules/loader'
 import category from './modules/category'
 
-export default createStore({
+const store = createStore({
   state: {
   },
   mutations: {
@@ -14,3 +14,10 @@ export default createStore({
     category
   }
 })
+
+export default store
+
+// ?? 
+export function useStore() {
+  return store
+}

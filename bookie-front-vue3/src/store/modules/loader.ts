@@ -1,7 +1,12 @@
 /*eslint no-debugger: "warn"*/
 
+type State = {
+  visible: boolean,
+  count: number
+}
+
 const mutations = {
-  showLoader(state) {
+  showLoader(state: State) {
     state.count += 1
 
     if (state.visible) {
@@ -12,7 +17,7 @@ const mutations = {
     // vm.$loading(true)
   },
 
-  hideLoader(state) {
+  hideLoader(state: State) {
     if (state.count > 0) {
       state.count -= 1
     }
@@ -23,7 +28,7 @@ const mutations = {
   }
 }
 
-const state = () => ({ visible: false, count: 0 })
+const state = (): State => ({ visible: false, count: 0 })
 
 export default {
   state,
