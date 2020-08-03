@@ -12,10 +12,10 @@ class CategoryService implements CategoryServiceInterface {
     try { 
       await console.log('coc')
     } catch (e) {
-      
+      console.log(e)
     }
     return data
   }
 }
 
-export default CategoryService
+export default new CategoryService()

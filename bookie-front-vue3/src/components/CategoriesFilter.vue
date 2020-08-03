@@ -29,17 +29,27 @@ export default defineComponent({
 
   methods: {
     updateSelectedCategory(category: any) {
-      console.log(category.selected)
       if (!category.selected) {
+        category.selected = true
         this.localSelectedCategories.push(category)
       } else {
         // remove from array
+        const index = this.localSelectedCategories.findIndex(selectedCategory => selectedCategory.id == category.id)
+
+        const newData = [
+          ...this.localSelectedCategories.slice(0, index),
+          ...this.localSelectedCategories.slice(index + 1)
+        ]
+
+        this.localSelectedCategories = newData
       }
+      console.log(this.localSelectedCategories)
       this.syncSelectedCategories()
     },
     syncSelectedCategories () {
-      console.log('this.localSelectedCategories')
-      console.log(this.localSelectedCategories)
+      // console.log('this.localSelectedCategories')
+      // console.log(this.localSelectedCategories)
+      // this.$store.dispatch('category/UPDATE_SELECTED_CATEGORIES', this.localSelectedCategories)
     }
   }
 })

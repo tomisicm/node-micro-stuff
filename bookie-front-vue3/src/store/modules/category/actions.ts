@@ -6,6 +6,7 @@ import CategoryService from '@/services/CategoryService'
 
 export type Actions<S = State> = {
   [ActionTypes.FETCH_ALL_CATEGORIES ] (store: any): void,
+  [ActionTypes.UPDATE_SELECTED_CATEGORIES] (store: any, payload: any) :void
 }
 
 const actions: ActionTree<State, State> & Actions = {
@@ -17,6 +18,7 @@ const actions: ActionTree<State, State> & Actions = {
 
   [ActionTypes.UPDATE_SELECTED_CATEGORIES] (store, payload) {
     console.log(store)
+    store.state.selectedCategories = payload
     console.log(payload)
   }
 }
