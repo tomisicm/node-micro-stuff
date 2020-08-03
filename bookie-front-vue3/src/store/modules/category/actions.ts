@@ -23,4 +23,6 @@ const actions: ActionTree<State, State> & Actions = {
   }
 }
 
+// TODO https://dev.to/3vilarthas/vuex-typescript-m4j
+
 export default actions
