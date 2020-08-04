@@ -43,13 +43,12 @@ export default defineComponent({
 
         this.localSelectedCategories = newData
       }
-      console.log(this.localSelectedCategories)
+
       this.syncSelectedCategories()
     },
     syncSelectedCategories () {
-      // console.log('this.localSelectedCategories')
-      // console.log(this.localSelectedCategories)
-      // this.$store.dispatch('category/UPDATE_SELECTED_CATEGORIES', this.localSelectedCategories)
+      console.log(this.localSelectedCategories)
+      this.$store.dispatch('category/UPDATE_SELECTED_CATEGORIES', this.localSelectedCategories)
     }
   }
 })
@@ -61,15 +60,26 @@ export default defineComponent({
     <ul v-for="category in allCategories" :key="category.id">
       <li>
         <button
+          class="w-full"
           :for="category.name"
           @click="updateSelectedCategory(category)"
         >
-          <input
-            :checked="category.selected"
-            type="checkbox"
-            :id="category.id"
-          />
-          {{ category.name }}
+          <div class="grid grid-cols-5">
+            <div 
+              class="col-span-1 self-center"
+            >
+              <input
+                :checked="category.selected"
+                type="checkbox"
+                :id="category.id"
+              />
+            </div>
+            <div
+              class="col-span-4 bg-blue-500 hover:bg-blue-700 text-white font-bold my-2 px-2 rounded"
+            >
+              {{ category.name }}
+            </div>
+          </div>
         </button>
       </li>
     </ul>

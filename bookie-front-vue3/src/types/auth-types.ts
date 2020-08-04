@@ -4,10 +4,9 @@ type LoginFormData = {
 }
 
 type RegisterFormData = { 
-    email: string | undefined,
-    password: string | undefined,
-    repeatPassword?: string | undefined
-  }
-  
+  email: string | undefined,
+  password: string | undefined,
+  repeatPassword?: string | undefined
+}
 
 export { LoginFormData as LoginForm, RegisterFormData as RegisterForm }

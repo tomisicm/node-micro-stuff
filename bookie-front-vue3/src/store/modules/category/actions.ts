@@ -17,9 +17,7 @@ const actions: ActionTree<State, State> & Actions = {
   },
 
   [ActionTypes.UPDATE_SELECTED_CATEGORIES] (store, payload) {
-    console.log(store)
     store.state.selectedCategories = payload
-    console.log(payload)
   }
 }
 
