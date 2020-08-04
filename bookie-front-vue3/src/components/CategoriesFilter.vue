@@ -33,21 +33,19 @@ export default defineComponent({
         category.selected = true
         this.localSelectedCategories.push(category)
       } else {
-        // remove from array
+        category.selected = false
         const index = this.localSelectedCategories.findIndex(selectedCategory => selectedCategory.id == category.id)
 
         const newData = [
           ...this.localSelectedCategories.slice(0, index),
           ...this.localSelectedCategories.slice(index + 1)
         ]
-
         this.localSelectedCategories = newData
       }
 
       this.syncSelectedCategories()
     },
     syncSelectedCategories () {
-      console.log(this.localSelectedCategories)
       this.$store.dispatch('category/UPDATE_SELECTED_CATEGORIES', this.localSelectedCategories)
     }
   }
