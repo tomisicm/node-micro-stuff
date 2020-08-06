@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-// import { SelectedCategory } from '@/types/category'
+import { SelectedCategory } from '@/types/category' 
 
 export default defineComponent({
   name: 'CategoriesFilter',
@@ -23,31 +23,35 @@ export default defineComponent({
 
   data () {
     return {
-      localSelectedCategories: this.selectedCategories
+      localSelectedCategories: this.selectedCategories as SelectedCategory[]
     }
   },
 
   methods: {
-    updateSelectedCategory(category: any) {
+    updateSelectedCategory(category: SelectedCategory) {
       if (!category.selected) {
         category.selected = true
         this.localSelectedCategories.push(category)
       } else {
         category.selected = false
-        const index = this.localSelectedCategories.findIndex(selectedCategory => selectedCategory.id == category.id)
 
+        const idx = this.localSelectedCategories
+          .findIndex((selectedCategory: SelectedCategory) => selectedCategory.id == category.id)
         const newData = [
-          ...this.localSelectedCategories.slice(0, index),
-          ...this.localSelectedCategories.slice(index + 1)
+          ...this.localSelectedCategories.slice(0, idx),
+          ...this.localSelectedCategories.slice(idx + 1)
         ]
         this.localSelectedCategories = newData
       }
-
       this.syncSelectedCategories()
     },
     syncSelectedCategories () {
       this.$store.dispatch('category/UPDATE_SELECTED_CATEGORIES', this.localSelectedCategories)
     }
+  },
+
+  watch: {
+    
   }
 })
 </script>

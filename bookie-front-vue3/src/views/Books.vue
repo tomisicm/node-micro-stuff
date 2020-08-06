@@ -36,7 +36,9 @@ export default defineComponent({
           ></categories-filter>
         </div>
         <div class="col-span-12 sm:col-span-8 md:col-span-8 lg:col-span-9 xl:col-span-9">
-          <categories-content></categories-content>
+          <categories-content
+            :selectedCategories="selectedCategories"
+          ></categories-content>
         </div>
       </div>
     </div>

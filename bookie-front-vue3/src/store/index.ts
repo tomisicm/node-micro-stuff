@@ -2,7 +2,8 @@ import { createStore } from 'vuex'
 import loader from './modules/loader'
 import category from './modules/category'
 
-const store = createStore({
+// TODO: CREATE GLOBAL STATE
+const store = createStore<any>({
   state: {
   },
   mutations: {
@@ -17,7 +18,6 @@ const store = createStore({
 
 export default store
 
-// ?? 
 export function useStore() {
   return store
 }
