@@ -7,13 +7,13 @@ export interface State {
 
 const state = (): State => ({
   allCategories: [
-    { id: '1', name: 'Science Fiction & Fantasy' },
-    { id: '2', name: 'Romance' }, 
-    { id: '3', name: 'Humor & Entertainment' }, 
-    { id: '4', name: 'Literature & Fiction' },
-    { id: '5', name: 'Engineering & Transportation' },
-    { id: '6', name: 'Cookbooks, Food & Wine' },
-    { id: '7', name: 'Crafts, Hobbies & Home' }
+    { id: '1', name: 'Science, Fiction and Fantasy' },
+    { id: '3', name: 'Humor and Entertainment' },
+    { id: '2', name: 'Romance' },
+    { id: '4', name: 'Literature and Fiction' },
+    { id: '5', name: 'Engineering and Transportation' },
+    { id: '6', name: 'Cookbooks, Food and Wine' },
+    { id: '7', name: 'Crafts, Hobbies and Home' }
   ],
   selectedCategories: []
 })

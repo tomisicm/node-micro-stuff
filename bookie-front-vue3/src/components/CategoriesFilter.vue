@@ -1,58 +1,85 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { SelectedCategory } from '@/types/category' 
+import { defineComponent, PropType } from 'vue'
+import { createNamespacedHelpers } from 'vuex'
+import { Category, SelectedCategory } from '@/types/category'
+import { isUrlEmpty } from '@/helpers/urlStructure'
+
+const { mapState } = createNamespacedHelpers('query')
 
 export default defineComponent({
   name: 'CategoriesFilter',
 
   props: {
     allCategories: {
-      type: Array,
-      required: false,
-      default: () => []
-    },
-    selectedCategories: {
-      type: Array,
+      type: Array as PropType<Category[]>,
       required: false,
       default: () => []
     }
-  },
-
-  setup () {
   },
 
   data () {
     return {
-      localSelectedCategories: this.selectedCategories as SelectedCategory[]
     }
+  },
+
+  mounted() {
+    // console.log(this)
+    console.log('categories')
+  },
+
+  created() {
+    this.checkQueryAndSetSelectedCategories()
   },
 
   methods: {
-    updateSelectedCategory(category: SelectedCategory) {
-      if (!category.selected) {
-        category.selected = true
-        this.localSelectedCategories.push(category)
-      } else {
-        category.selected = false
-
-        const idx = this.localSelectedCategories
-          .findIndex((selectedCategory: SelectedCategory) => selectedCategory.id == category.id)
-        const newData = [
-          ...this.localSelectedCategories.slice(0, idx),
-          ...this.localSelectedCategories.slice(idx + 1)
-        ]
-        this.localSelectedCategories = newData
+    checkQueryAndSetSelectedCategories() {
+      // TODO: value will be removed
+      if (this.$router.currentRoute.value) {
+        
+        if (!isUrlEmpty(this.$router.currentRoute.value.query)) {
+          debugger  // eslint-disable-line
+          this.$store.dispatch('query/UPDATE_SELECTED_QUERY', this.$router.currentRoute.value.query)
+        }
       }
-      this.syncSelectedCategories()
     },
-    syncSelectedCategories () {
-      this.$store.dispatch('category/UPDATE_SELECTED_CATEGORIES', this.localSelectedCategories)
+    updateSelectedCategory(category: Category) {
+      const isSelected = this.selectedCategories.includes(category.name)
+      // debugger  // eslint-disable-line
+
+      if (isSelected) {
+        this.$store.dispatch('query/REMOVE_SINGLE_SELECTED_QUERY', category)
+      } else {
+        this.$store.dispatch('query/ADD_SINGLE_SELECTED_QUERY', category)
+      }
+      this.updateRoute()
+    },
+
+    updateRoute() {
+      if (this.selectedCategories.length > 1) {
+        debugger  // eslint-disable-line
+        this.$router.push({
+          name: 'books',
+          query: { 'categories': this.selectedCategories }
+        })
+      } else if (this.selectedCategories.length == 1) {
+        debugger  // eslint-disable-line
+        this.$router.push({
+          name: 'books',
+          query: { 'categories': this.selectedCategories[0] }
+        })
+      } else {
+        this.$router.push({
+          name: 'books'
+        })
+      }
     }
   },
 
-  watch: {
-    
-  }
+  computed: {
+    ...mapState({
+      selectedCategories: state => state.selectedCategories,
+    })
+  },
 })
 </script>
 
@@ -71,7 +98,7 @@ export default defineComponent({
               class="col-span-1 self-center"
             >
               <input
-                :checked="category.selected"
+                :checked="selectedCategories.includes(category.name)"
                 type="checkbox"
                 :id="category.id"
               />

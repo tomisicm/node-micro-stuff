@@ -1,4 +1,5 @@
 import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router'
+import qs from 'qs'
 
 import Home from '@/views/Home.vue'
 
@@ -48,7 +49,28 @@ const routes: Array<RouteRecordRaw> = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: routes
+  routes: routes,
+  // TODO: ROUTER ISSUE?
+  // OBJECTS ARE PARSED CORRECTLY
+  // https://developer.aliyun.com/mirror/npm/package/clever-qs
+  // https://npmdoc.github.io/node-npmdoc-qs/build/apidoc.html
+  // @ts-ignore/
+  // parseQuery: (query: string): object => { // @ts-ignore
+  //   // debugger  // eslint-disable-line
+  //   const queryObject = qs.parse(query, { delimiter: ',', arrayLimit: 0 }) // @ts-ignore
+  //   console.log('parseQuery')
+  //   console.log(queryObject)
+  //   return queryObject
+  // },
+  // stringifyQuery(query: any): string {
+  //   console.log('stringifyQuery')
+  //   console.log(query)
+  //   let result = qs.stringify(query, { arrayFormat: 'indices', delimiter: ',', encode: true })
+  //   console.log(result)
+  //   return result ? result : ''
+  // }
+  parseQuery: qs.parse,
+  stringifyQuery: qs.stringify,
 })
 
 export default router

@@ -1,6 +1,8 @@
 import { createStore } from 'vuex'
 import loader from './modules/loader'
 import category from './modules/category'
+import query from './modules/query'
+
 
 // TODO: CREATE GLOBAL STATE
 const store = createStore<any>({
@@ -12,7 +14,8 @@ const store = createStore<any>({
   },
   modules: {
     loader,
-    category
+    category,
+    query
   }
 })
 
