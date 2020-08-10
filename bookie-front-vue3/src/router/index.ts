@@ -1,5 +1,5 @@
 import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router'
-import qs from 'qs'
+// import qs from 'qs'
 
 import Home from '@/views/Home.vue'
 
@@ -44,6 +44,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/books',
     name: 'books',
     component: () => import(/* webpackChunkName: "books" */ '@/views/Books.vue'),
+    props: (route) => { query: route.fullPath } // eslint-disable-line
   }
 ]
 
@@ -69,8 +70,8 @@ const router = createRouter({
   //   console.log(result)
   //   return result ? result : ''
   // }
-  parseQuery: qs.parse,
-  stringifyQuery: qs.stringify,
+  // parseQuery: qs.parse,
+  // stringifyQuery: qs.stringify
 })
 
 export default router

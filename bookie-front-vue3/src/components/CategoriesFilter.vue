@@ -37,14 +37,12 @@ export default defineComponent({
       if (this.$router.currentRoute.value) {
         
         if (!isUrlEmpty(this.$router.currentRoute.value.query)) {
-          debugger  // eslint-disable-line
           this.$store.dispatch('query/UPDATE_SELECTED_QUERY', this.$router.currentRoute.value.query)
         }
       }
     },
     updateSelectedCategory(category: Category) {
       const isSelected = this.selectedCategories.includes(category.name)
-      // debugger  // eslint-disable-line
 
       if (isSelected) {
         this.$store.dispatch('query/REMOVE_SINGLE_SELECTED_QUERY', category)
@@ -56,13 +54,11 @@ export default defineComponent({
 
     updateRoute() {
       if (this.selectedCategories.length > 1) {
-        debugger  // eslint-disable-line
         this.$router.push({
           name: 'books',
           query: { 'categories': this.selectedCategories }
         })
       } else if (this.selectedCategories.length == 1) {
-        debugger  // eslint-disable-line
         this.$router.push({
           name: 'books',
           query: { 'categories': this.selectedCategories[0] }
