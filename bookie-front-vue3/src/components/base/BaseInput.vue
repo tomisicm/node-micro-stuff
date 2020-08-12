@@ -32,7 +32,7 @@ export default defineComponent({
   name: 'base-input',
 
   computed: {
-    wrapperClasses() {
+    wrapperClasses(): string {
       let classes = this.wrapperBaseClasses
 
       if (this.errorMessage) {
@@ -53,7 +53,7 @@ export default defineComponent({
       required: false,
       default: 'text',
       validator(value) {
-        return INPUT_TYPES.indexOf(value) !== -1
+        return INPUT_TYPES.indexOf(value as string) !== -1
       }
     },
 

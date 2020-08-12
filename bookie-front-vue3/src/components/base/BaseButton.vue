@@ -29,7 +29,7 @@ export default defineComponent({
       required: false,
       default: 'button',
       validator(value) {
-        return BUTTON_TYPES.indexOf(value) !== -1
+        return BUTTON_TYPES.indexOf(value as string) !== -1
       }
     },
 
@@ -38,7 +38,7 @@ export default defineComponent({
       required: false,
       default: 'primary',
       validator(value) {
-        return BUTTON_VARIATIONS.indexOf(value) !== -1
+        return BUTTON_VARIATIONS.indexOf(value as string) !== -1
       }
     },
 
@@ -56,7 +56,7 @@ export default defineComponent({
   },
 
   computed: {
-    className() {
+    className(): string {
       return `
         ${this.type}
         ${this.fullWidth ? 'btn--full' : ''}

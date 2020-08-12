@@ -1,19 +1,21 @@
 <script  lang="ts">
 import { defineComponent, PropType, watch, readonly, getCurrentInstance } from 'vue'
 import { SelectedCategory } from '@/types/category'
+import useRouter from '@/router'
 
 export default defineComponent({
   name: 'selected books',
 
   setup (props, context) {
-    function fetchNewProducts(oldVal, newVal): void {
+    function fetchNewProducts(oldVal: any, newVal: any): void {
       console.log(oldVal)
       console.log(newVal)
     }
 
     // https://medium.com/js-dojo/watch-vue-route-params-query-with-composition-api-97b3c8c402e
     // https://github.com/vuejs/rfcs/issues/70
-    const router =  getCurrentInstance().ctx.$router
+    // @ts-ignore
+    const router =  getCurrentInstance()?.ctx?.$router  
     // debugger // eslint-disable-line
     // console.log(props) 
     // console.log(getCurrentInstance().ctx.$router)

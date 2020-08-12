@@ -82,13 +82,13 @@ export default defineComponent({  name: 'Login',
         return
       }
       try {
-        Store.commit('showLoader', context.root)   // TODO
+        // Store.commit('showLoader', context.root)   // TODO
         await logIn({ email: userEmail.value, password: userPassword.value })
         resetForm()
       } catch (e) {
         console.log(e)
       } finally {
-        Store.commit('hideLoader', context.root)
+        // Store.commit('hideLoader', context.root)
       }
     }
 

@@ -7,17 +7,17 @@
 </template>
 
 <script  lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 // https://github.com/vuejs/vue/pull/6856
 // https://stackoverflow.com/questions/54391162/typescript-wont-recognize-prop-values-on-vue-component
-// interface Error {
-//   $message: string;
-// }
+type Error = {
+  $message: string;
+}
 
 export default defineComponent({
   props: {
     errors: {
-      type: Array,
+      type: Array as PropType<Error[]>,
       required: true
     },
 
@@ -35,7 +35,7 @@ export default defineComponent({
   },
 
   computed: {
-    errorList() {
+    errorList (): string | string[] {
       if (!this.errors.length) { return [] }
 
       if (this.showAll) {

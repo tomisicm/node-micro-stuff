@@ -34,9 +34,11 @@ export default defineComponent({
   methods: {
     checkQueryAndSetSelectedCategories() {
       // TODO: value will be removed
+      // @ts-ignore
       if (this.$router.currentRoute.value) {
-        
+        // @ts-ignore
         if (!isUrlEmpty(this.$router.currentRoute.value.query)) {
+          // @ts-ignore
           this.$store.dispatch('query/UPDATE_SELECTED_QUERY', this.$router.currentRoute.value.query)
         }
       }
@@ -54,16 +56,19 @@ export default defineComponent({
 
     updateRoute() {
       if (this.selectedCategories.length > 1) {
+        // @ts-ignore
         this.$router.push({
           name: 'books',
           query: { 'categories': this.selectedCategories }
         })
       } else if (this.selectedCategories.length == 1) {
+        // @ts-ignore
         this.$router.push({
           name: 'books',
           query: { 'categories': this.selectedCategories[0] }
         })
       } else {
+        // @ts-ignore
         this.$router.push({
           name: 'books'
         })
@@ -73,7 +78,7 @@ export default defineComponent({
 
   computed: {
     ...mapState({
-      selectedCategories: state => state.selectedCategories,
+      selectedCategories: (state: any) => state.selectedCategories,
     })
   },
 })

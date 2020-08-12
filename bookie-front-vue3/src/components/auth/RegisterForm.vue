@@ -63,10 +63,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { ref } from 'vue'
+import { defineComponent, ref, getCurrentInstance } from 'vue'
 import useUser from '@/hooks/useUser'
 import useUserRegister from '@/hooks/useUserRegister'
+import useRouter from '@/router'
 
 export default defineComponent({
   name: 'Register',
@@ -89,7 +89,9 @@ export default defineComponent({
         console.log(regData)
         const logData = await logIn({ email: userEmail.value, password: userPassword.value })
         console.log(logData)
-        context.root.$router.push({ name: 'home' })
+
+        useRouter.push({ name: 'home' })
+
       } catch (e) {
         console.log(e)
       } finally {

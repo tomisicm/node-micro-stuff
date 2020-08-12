@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import registerGlobalComponents from './components/registerGlobals'
+import registerMonitoring from '@/monitoring'
 import router from '@/router'
 import store from '@/store'
 
@@ -18,6 +19,7 @@ function useApplicationPlugins (Application) {
 
 // @ts-ignore
 function mountApplication (Application) {
+  registerMonitoring(Application)
   return Application.mount('#app')
 }
 
